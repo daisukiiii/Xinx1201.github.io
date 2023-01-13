@@ -11,15 +11,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="recordTime" label="记录时间" align="center">
       </el-table-column>
-      <el-table-column label="区服" align="center">
-        <template slot-scope="scope">
-          <span>{{
-            serverList
-              .map((x) => x.options)
-              .flat()
-              .find((x) => x.server == scope.row.server).zone
-          }}</span>
-        </template>
+      <el-table-column prop="zone" label="区服" align="center">
       </el-table-column>
       <el-table-column prop="server" label="服务器" align="center">
       </el-table-column>

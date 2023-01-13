@@ -241,6 +241,7 @@ export default {
         recordTime: !this.isChangeCurrentTime
           ? this.currentTime
           : this.customcurrentTime,
+        zone: this.form.zone, // 区服
         server: this.form.server, // 服务器
         map: this.form.map, // 地点
         type: this.form.type, // 马的种类

@@ -54,10 +54,10 @@
             :label="group.zone"
           >
             <el-option
-              v-for="item in group.options"
-              :key="item.server"
-              :label="item.server"
-              :value="item.server"
+              v-for="item in group.servers"
+              :key="item"
+              :label="item"
+              :value="item"
             >
             </el-option>
           </el-option-group>

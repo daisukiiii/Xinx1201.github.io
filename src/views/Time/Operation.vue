@@ -1,6 +1,19 @@
 <template>
   <div class="operation">
     <el-select
+      @change="onChangeZone"
+      v-model="form.zone"
+      placeholder="请选择大区"
+    >
+      <el-option
+        v-for="item in serverList"
+        :key="item.zone"
+        :label="item.zone"
+        :value="item.zone"
+      >
+      </el-option>
+    </el-select>
+    <el-select
       class="mgl10"
       filterable
       default-first-option
@@ -8,19 +21,15 @@
       v-model="form.server"
       placeholder="请选择服务器"
     >
-      <el-option-group
-        v-for="group in serverList"
-        :key="group.zone"
-        :label="group.zone"
+      <el-option
+        v-for="item in form.zone
+          ? serverList.find((x) => x.zone == form.zone).servers
+          : serverList.map((x) => x.servers).flat()"
+        :key="item"
+        :label="item"
+        :value="item"
       >
-        <el-option
-          v-for="item in group.options"
-          :key="item.server"
-          :label="item.server"
-          :value="item.server"
-        >
-        </el-option>
-      </el-option-group>
+      </el-option>
     </el-select>
     <el-select
       v-model="form.map"
@@ -65,6 +74,7 @@ import { filterKeyWord } from '@/utils';
 import horseMapOptions from '@/assets/data/horseMap.json';
 import serverList from '@/assets/data/server.json';
 const genNew = () => ({
+  zone: '双线一区', // 区服
   server: '破阵子', // 服务器
   map: '', // 地点
   type: '', // 马的种类
@@ -141,6 +151,9 @@ export default {
   },
 
   methods: {
+    onChangeZone(val) {
+      this.form.server = this.serverList.find((x) => x.zone == val).servers[0];
+    },
     onSelectChange() {
       this.$emit('select', this.form);
     },
