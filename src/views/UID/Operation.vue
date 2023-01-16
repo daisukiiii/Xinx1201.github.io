@@ -22,7 +22,7 @@
           :label="item.horse + item.uid"
           :value="item.uid"
         >
-          <span style="float: left">{{ item.horse }}</span>
+          <span style="float: left">{{ item.horse.split('·')[1] }}</span>
           <span style="float: right; color: #409eff; font-size: 10px">{{
             item.uid
           }}</span>

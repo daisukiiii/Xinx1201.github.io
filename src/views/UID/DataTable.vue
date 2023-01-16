@@ -92,7 +92,11 @@ export default {
       row.forEach((x, index) => {
         if (x.attr.find((x) => x.includes('劲足'))) {
           info += x.uid + ' ';
-          info += x.horse + ' ';
+          info +=
+            x.horse +
+            (x.suffix ? '·' + x.suffix : '') +
+            ' ' +
+            (x['双骑'] ? '[双]' : '');
           info += `【${x.attr}】${row.length - 1 == index ? '' : ' '}\n`;
         }
       });
