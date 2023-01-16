@@ -85,7 +85,7 @@ export default {
     //数据发送
     websocketsend() {
       this.msg.push(`发送信息✈️` + this.text);
-      window.websock.send(JSON.stringify(this.text));
+      window.websock.send(JSON.stringify(JSON.parse(this.text)));
     },
     //连接关闭
     websocketclose(e) {

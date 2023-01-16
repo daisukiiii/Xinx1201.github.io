@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { filterKeyWord } from '@/utils';
+import { filterKeyWord, randomInt } from '@/utils';
 import emoticons from '@/assets/data/emoticons.json';
 import serverList from '@/assets/data/server.json';
 export default {
@@ -84,13 +84,9 @@ export default {
       this.multipleSelection = val;
       this.$emit('selection', this.multipleSelection);
     },
-    randomInt(min, max) {
-      return Math.round(Math.random() * (max - min) + min);
-    },
     // 复制
     copy(row) {
-      let randomEmoji =
-        this.emoticons[this.randomInt(0, this.emoticons.length)];
+      let randomEmoji = this.emoticons[randomInt(0, this.emoticons.length)];
       let oInput = document.createElement('input');
       // 将想要复制的值
       oInput.value = `【${row.server}】将于${row.endTime.split(' ')[1]}在 ${
