@@ -1,9 +1,10 @@
 <template>
-  <el-table :data="data" border stripe style="width: 100%">
+  <el-table :data="tableData" border stripe style="width: 100%">
     <el-table-column align="center" prop="horse" label="成马">
       <template slot-scope="scope">
-        <copyable :value="scope.row.horse" />
-        {{ scope.row['双骑'] ? `(${scope.row['双骑']})` : '' }}
+        <span>{{ scope.row.horse }}·{{ scope.row.suffix }}</span>
+        </el-tooltip>
+        <span class="doubleRider" v-if="scope.row['双骑']">双</span>
       </template>
     </el-table-column>
     <el-table-column align="center" prop="uid" label="UID">
@@ -54,13 +55,24 @@ import { filterKeyWord } from '@/utils';
 export default {
   naem: 'HouseDetail',
   props: {
-    data: {
+    tableData: {
       type: Array,
       default: () => [],
     },
+    data() {
+      return {};
+    },
   },
-  methods: {},
+  methods: {
+  },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.doubleRider {
+  background-color: #fb700d;
+  color: #fff;
+  padding: 3px;
+  margin-left: 5px;
+}
+</style>

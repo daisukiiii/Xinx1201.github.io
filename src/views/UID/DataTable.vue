@@ -6,25 +6,24 @@
     style="width: 100%"
     @row-click="rowClick"
     height="80vh"
-    :span-method="objectSpanMethod"
     ref="table"
   >
     <el-table-column align="center" prop="horse" label="马驹" width="180">
       <template slot-scope="scope">
-        {{ scope.row.horse.split('·')[0] }}·{{ scope.row.horse.split('·')[1] }}
+        {{ scope.row.horse }}
         <el-tooltip
-          v-if="scope.row.horse.split('·').length == 3"
+          v-if="scope.row.suffix"
           effect="dark"
-          :content="horseMap(scope.row.horse.split('·')[2])"
+          :content="getMap(scope.row.suffix)"
           placement="top"
         >
-          <span>{{ scope.row.horse.split('·')[2] }}</span>
+          <span>·{{ scope.row.suffix }}</span>
         </el-tooltip>
       </template>
     </el-table-column>
     <el-table-column type="expand">
       <template slot-scope="scope">
-        <Detail :data="scope.row.children" />
+        <Detail :table-data="scope.row.children" />
       </template>
     </el-table-column>
     <el-table-column align="center" prop="level" label="等级" width="80" />
@@ -58,6 +57,7 @@
 <script>
 import Detail from './Detail.vue';
 import { filterKeyWord } from '@/utils';
+import horseMapOptions from '@/assets/data/horseMap.json';
 export default {
   name: 'UIDDataTable',
   components: {
@@ -69,11 +69,23 @@ export default {
       default: () => [],
     },
     data() {
-      return {};
+      return {
+        horseMapOptions,
+      };
     },
   },
   computed: {},
   methods: {
+    // 马驹对应地图
+    getMap(val) {
+      let map = horseMapOptions.find((x) => x.type == '马场').positions;
+      if (map.find((x) => x.suffix == val)) {
+        return map.find((x) => x.suffix == val).map;
+      } else {
+        return;
+      }
+      return;
+    },
     // 展示精简信息
     simpleInfo(row) {
       let info = '';
@@ -91,50 +103,6 @@ export default {
       // 复制uid不允许展开行
       if (column.property == 'uid') return;
       this.$refs.table.toggleRowExpansion(row);
-    },
-
-    // 马驹对应地图
-    horseMap(type) {
-      let horseMap = {
-        燕歌: '黑戈壁',
-        潮生: '鲲鹏岛',
-        踏莎: '阴山大草原',
-      };
-      return horseMap[type];
-    },
-
-    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (columnIndex === 0) {
-        let spanArr = this.getSpanArr(this.tableData, 'horse');
-        const _row = spanArr[rowIndex];
-        const _col = _row > 0 ? 1 : 0;
-        return {
-          rowspan: _row,
-          colspan: _col,
-        };
-      }
-    },
-    // 处理合并行的数据
-    getSpanArr(data, spanKey) {
-      let that = this;
-      let spanArr = [];
-      let pos = '';
-      for (let i = 0; i < data.length; i++) {
-        if (i === 0) {
-          spanArr.push(1);
-          pos = 0;
-        } else {
-          // 判断当前元素与上一个元素是否相同
-          if (data[i][spanKey] === data[i - 1][spanKey]) {
-            spanArr[pos] += 1;
-            spanArr.push(0);
-          } else {
-            spanArr.push(1);
-            pos = i;
-          }
-        }
-      }
-      return spanArr;
     },
   },
 };
