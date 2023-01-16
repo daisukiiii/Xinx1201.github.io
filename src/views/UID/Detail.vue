@@ -2,7 +2,8 @@
   <el-table :data="tableData" border stripe style="width: 100%">
     <el-table-column align="center" prop="horse" label="成马">
       <template slot-scope="scope">
-        <span>{{ scope.row.horse }}·{{ scope.row.suffix }}</span>
+        <span>{{ scope.row.horse }}</span>
+        <span v-if="scope.row.suffix">·{{ scope.row.suffix }}</span>
         </el-tooltip>
         <span class="doubleRider" v-if="scope.row['双骑']">双</span>
       </template>
