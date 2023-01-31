@@ -46,11 +46,11 @@ export default {
       }
     },
     {
-      path: '/Test',
-      name: 'Test',
-      component: () => import('@/views/Test'),
+      path: '/Websocket',
+      name: 'Websocket',
+      component: () => import('@/views/Websocket'),
       meta: {
-        title: '测试页面'
+        title: 'Websocket'
       }
     },
   ],

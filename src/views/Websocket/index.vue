@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'Test',
+  name: 'Websocket',
   data() {
     return {
       url: '', // websocket地址
