@@ -224,7 +224,7 @@ export default {
 <style lang="scss" scoped>
 .box {
   border: 1px solid #ebeef5;
-  width: 1300px;
+  width: 1440px;
 
   // 去除card自带的padding
   ::v-deep {

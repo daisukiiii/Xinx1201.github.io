@@ -92,6 +92,13 @@
     "img": "https://img.jx3box.com/adventure/adventure/std/reward/open/三山四海_open.png"
   },
   {
+    "name": "拜春擂",
+    "bg": "https://img.jx3box.com/image/pvx/bg.png",
+    "type": 1,
+    "text": "https://img.jx3box.com/adventure/image_ui/std/luckymeeting7_89.png",
+    "img": "https://img.jx3box.com/adventure/adventure/std/reward/open/拜春擂_open.png"
+  },
+  {
     "name": "镜中琴音",
     "bg": "https://img.jx3box.com/image/pvx/bg.png",
     "type": 1,
