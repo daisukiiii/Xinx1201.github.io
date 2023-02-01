@@ -53,5 +53,13 @@ export default {
         title: 'Websocket'
       }
     },
+    {
+      path: '/ComponentsSkills',
+      name: 'ComponentsSkills',
+      component: () => import('@/views/ComponentsSkills'),
+      meta: {
+        title: 'ElementUI组件相关'
+      }
+    },
   ],
 }
