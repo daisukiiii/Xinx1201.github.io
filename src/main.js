@@ -11,9 +11,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import * as filters from '@/utils/filters.js' // 过滤器
 import '@/assets/style/font.scss' // 引入全局字体
 
+// 引入Echarts
+import * as echarts from 'echarts'
+
 Vue.use(ElementUI)
 Vue.component('Copyable', Copyable)
 Vue.prototype.$dialog = dialog
+Vue.prototype.$echarts = echarts
 
 // register global utility filters
 Object.keys(filters).forEach((key) => {

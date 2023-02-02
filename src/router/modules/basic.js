@@ -3,7 +3,7 @@ import Layout from '@/Layout'
 export default {
   path: '/',
   component: Layout,
-  redirect: 'Fame',
+  redirect: 'Echarts',
   children: [
     {
       path: '/Fame',
@@ -59,6 +59,14 @@ export default {
       component: () => import('@/views/ComponentsSkills'),
       meta: {
         title: 'ElementUI组件相关'
+      }
+    },
+    {
+      path: '/Echarts',
+      name: 'Echarts',
+      component: () => import('@/views/Echarts'),
+      meta: {
+        title: 'Echarts'
       }
     },
   ],
