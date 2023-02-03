@@ -31,20 +31,20 @@ export default {
     return {
       tabs: [
         {
-          name: 'Echarts图表',
-          key: 'Echarts',
-        },
-        {
           name: '代办列表',
           key: 'TodoList',
         },
         {
-          name: 'Websocket',
-          key: 'Websocket',
-        },
-        {
           name: '防抖节流',
           key: 'DebounceThrottle',
+        },
+        {
+          name: 'Echarts图表',
+          key: 'Echarts',
+        },
+        {
+          name: 'Websocket',
+          key: 'Websocket',
         },
         {
           name: 'ElementUI相关',
