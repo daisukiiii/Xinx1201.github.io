@@ -29,6 +29,7 @@
 <script>
 import debounce from 'lodash/debounce';
 import throttle from 'lodash/throttle';
+import dayjs from 'dayjs';
 export default {
   name: 'DebounceThrottle',
   data() {
@@ -54,12 +55,12 @@ export default {
     },
     // 防抖处理的input
     debounceInput: debounce(function (val) {
-      console.log(val);
-    }, 500),
+      console.log(dayjs().format('HH:mm:ss'), val);
+    }, 1000),
     // 节流处理的input
     throttleInput: throttle(function (val) {
-      console.log(val);
-    }, 500),
+      console.log(dayjs().format('HH:mm:ss'), val);
+    }, 1000),
   },
 };
 </script>
