@@ -41,13 +41,7 @@ export default {
       },
     };
   },
-  watch: {
-    'form.unDebounce': {
-      handler(val) {
-        // console.log(val);
-      },
-    },
-  },
+  watch: {},
   methods: {
     // 未进行防抖处理的input
     unDebounceInput(val) {
@@ -56,7 +50,7 @@ export default {
     // 防抖处理的input
     debounceInput: debounce(function (val) {
       console.log(dayjs().format('HH:mm:ss'), val);
-    }, 1000),
+    }, 500),
     // 节流处理的input
     throttleInput: throttle(function (val) {
       console.log(dayjs().format('HH:mm:ss'), val);
