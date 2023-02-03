@@ -1,11 +1,12 @@
 <template>
   <div>
     <el-tabs type="border-card" class="tabs-container">
-      <el-tab-pane v-for="item in tabs" :label="item" :key="item">
-        <Echarts v-if="item == 'Echarts'" />
-        <TodoList v-if="item == 'TodoList'" />
-        <Websocket v-if="item == 'Websocket'" />
-        <ComponentsSkills v-if="item == 'ElementUI相关'" />
+      <el-tab-pane v-for="item in tabs" :label="item.name" :key="item.key">
+        <Echarts v-if="item.key == 'Echarts'" />
+        <TodoList v-if="item.key == 'TodoList'" />
+        <Websocket v-if="item.key == 'Websocket'" />
+        <DebounceThrottle v-if="item.key == 'DebounceThrottle'" />
+        <ComponentsSkills v-if="item.key == 'ComponentsSkills'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -15,6 +16,7 @@
 import Echarts from './Echarts';
 import TodoList from './TodoList';
 import Websocket from './Websocket';
+import DebounceThrottle from './DebounceThrottle';
 import ComponentsSkills from './ComponentsSkills';
 export default {
   name: 'Practice',
@@ -22,11 +24,33 @@ export default {
     Echarts,
     TodoList,
     Websocket,
+    DebounceThrottle,
     ComponentsSkills,
   },
   data() {
     return {
-      tabs: ['Echarts', 'TodoList', 'Websocket', 'ElementUI相关'],
+      tabs: [
+        {
+          name: 'Echarts图表',
+          key: 'Echarts',
+        },
+        {
+          name: '代办列表',
+          key: 'TodoList',
+        },
+        {
+          name: 'Websocket',
+          key: 'Websocket',
+        },
+        {
+          name: '防抖节流',
+          key: 'DebounceThrottle',
+        },
+        {
+          name: 'ElementUI相关',
+          key: 'ComponentsSkills',
+        },
+      ],
     };
   },
   methods: {},
