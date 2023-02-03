@@ -38,35 +38,11 @@ export default {
       }
     },
     {
-      path: '/todoList',
-      name: 'TodoList',
-      component: () => import('@/views/TodoList'),
+      path: '/Practice',
+      name: 'Practice',
+      component: () => import('@/views/Practice'),
       meta: {
-        title: '待办清单'
-      }
-    },
-    {
-      path: '/Websocket',
-      name: 'Websocket',
-      component: () => import('@/views/Websocket'),
-      meta: {
-        title: 'Websocket'
-      }
-    },
-    {
-      path: '/ComponentsSkills',
-      name: 'ComponentsSkills',
-      component: () => import('@/views/ComponentsSkills'),
-      meta: {
-        title: 'ElementUI组件相关'
-      }
-    },
-    {
-      path: '/Echarts',
-      name: 'Echarts',
-      component: () => import('@/views/Echarts'),
-      meta: {
-        title: 'Echarts'
+        title: '练习'
       }
     },
   ],
