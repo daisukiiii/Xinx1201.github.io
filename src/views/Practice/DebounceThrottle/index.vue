@@ -51,7 +51,7 @@ export default {
   methods: {
     // 未进行防抖处理的input
     unDebounceInput(val) {
-      console.log(val);
+      console.log(dayjs().format('HH:mm:ss'), val);
     },
     // 防抖处理的input
     debounceInput: debounce(function (val) {
