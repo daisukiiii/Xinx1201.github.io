@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div id="graph"></div>
-  </div>
+  <div id="graph" class="flex-row flex-center"></div>
 </template>
 
 <script>
@@ -111,7 +109,7 @@ export default {
     initViolin(dataList) {
       let rows = dataList;
       function unpack(rows, key) {
-        return rows.map(function (row) {
+        return rows.map(function(row) {
           return row[key];
         });
       }
@@ -121,36 +119,38 @@ export default {
           type: 'violin',
           x: unpack(rows, 'x'),
           y: unpack(rows, 'y'),
-          tickformat: '%Y-%MM-%D',
-          points: 'outliers',
+          tickformat: '%Y-%MM',
+          points: 'all',
           box: {
-            visible: true,
+            visible: false,
           },
           line: {
             color: '#1f77b4',
           },
+          hoverinfo: 'y',
+          hovertemplate: '%{y}日: %{y}',
+          hoveron: 'points+kde',
           meanline: {
             visible: true,
           },
-        },
-        {
-          x: ['2022-01-01', '2022-01-01', '2022-01-03', '2022-01-04'],
-          y: [10, 19, 22, 13],
-          name: '测试数据',
-          mode: 'markers',
+          side: 'positive',
+          pointpos: '-0.5',
           marker: {
-            size: [20, 40, 80, 160],
+            size: 10,
+            opacity: 0.5,
           },
         },
       ];
 
       let layout = {
-        title: 'plotly.js 中的 小提琴图&气泡图',
+        title: '小提琴图',
         hovermode: 'closest',
         xaxis: {
           // For more time formatting types, see: https://github.com/d3/d3-time-format/blob/master/README.md
-          tickformat: '%Y-%m-%d',
+          tickformat: '%Y-%m',
+          tickvals: ['2022-01', '2022-02', '2022-03', '2022-04', '2022-05'],
         },
+        width:'1500',
         yaxis: {
           zeroline: false,
           title: {
@@ -165,4 +165,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+</style>
