@@ -3,7 +3,7 @@ import Layout from '@/Layout'
 export default {
   path: '/',
   component: Layout,
-  redirect: 'Fame',
+  redirect: 'Practice',
   children: [
     {
       path: '/Fame',
