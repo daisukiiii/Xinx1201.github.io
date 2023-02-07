@@ -4,118 +4,54 @@
 
 <script>
 import Plotly from 'plotly.js-dist';
+import listData from './list.json';
 export default {
   name: 'Violin',
   data() {
     return {
-      listData: [
-        {
-          x: '2022-01-01',
-          y: 7.5161,
-        },
-        {
-          x: '2022-01-01',
-          y: 8.5161,
-        },
-        {
-          x: '2022-01-01',
-          y: 2.5161,
-        },
-        {
-          x: '2022-01-01',
-          y: 1.5161,
-        },
-        {
-          x: '2022-01-01',
-          y: 9.5161,
-        },
-        {
-          x: '2022-01-01',
-          y: 12.5161,
-        },
-        {
-          x: '2022-01-01',
-          y: 12.1,
-        },
-        {
-          x: '2022-01-01',
-          y: 7.51,
-        },
-        {
-          x: '2022-01-01',
-          y: 29,
-        },
-        {
-          x: '2022-01-01',
-          y: 17.2,
-        },
-        {
-          x: '2022-01-01',
-          y: 17.56,
-        },
-
-        {
-          x: '2022-01-02',
-          y: 7.5161,
-        },
-        {
-          x: '2022-01-02',
-          y: 8.5161,
-        },
-        {
-          x: '2022-01-02',
-          y: 2.5161,
-        },
-        {
-          x: '2022-01-02',
-          y: 1.5161,
-        },
-        {
-          x: '2022-01-02',
-          y: 9.5161,
-        },
-        {
-          x: '2022-01-02',
-          y: 12.5161,
-        },
-        {
-          x: '2022-01-02',
-          y: 12.1,
-        },
-        {
-          x: '2022-01-02',
-          y: 7.51,
-        },
-        {
-          x: '2022-01-02',
-          y: 37.5,
-        },
-        {
-          x: '2022-01-02',
-          y: 17.2,
-        },
-        {
-          x: '2022-01-02',
-          y: 17.56,
-        },
-      ],
+      listData,
     };
   },
   mounted() {
     this.initViolin(this.listData);
   },
   methods: {
+    // x轴抽取到对应的间隔范围
+    formatXaxis(date) {
+      let arr = [];
+      date.forEach((x) => {
+        // 年 - 月
+        let str = x.split('-')[0] + '-' + x.split('-')[1];
+        if (!arr.some((x) => x == str)) {
+          arr.push(str);
+        }
+      });
+      return arr;
+    },
+
     /*小提琴图插件展示*/
-    initViolin(dataList) {
+    initViolin(listData) {
+      let dataList = Object.keys(listData).map((key) => {
+        return {
+          // x: key,
+          x: key.split('-')[0] + '-' + key.split('-')[1],
+          y: listData[key].length,
+        };
+      });
+
+      // x轴显示的区间范围
+      let xTickvals = this.formatXaxis(Object.keys(listData));
+      console.log(xTickvals);
+      var myPlot = document.getElementById('graph');
       let rows = dataList;
       function unpack(rows, key) {
-        return rows.map(function(row) {
+        return rows.map(function (row) {
           return row[key];
         });
       }
       let data = [
         {
-          name: '测试',
+          name: '',
           type: 'violin',
           x: unpack(rows, 'x'),
           y: unpack(rows, 'y'),
@@ -128,15 +64,16 @@ export default {
             color: '#1f77b4',
           },
           hoverinfo: 'y',
-          hovertemplate: '%{y}日: %{y}',
+          hovertemplate: `数值：%{y}`,
           hoveron: 'points+kde',
           meanline: {
             visible: true,
           },
-          side: 'positive',
-          pointpos: '-0.5',
+          side: 'positive', // 小提琴阴影只显示正极
+          pointpos: '-0.5', // 气泡图位置
+          bandwidth: 10, // 设置小提琴阴影宽度
           marker: {
-            size: 10,
+            size: 12,
             opacity: 0.5,
           },
         },
@@ -148,9 +85,9 @@ export default {
         xaxis: {
           // For more time formatting types, see: https://github.com/d3/d3-time-format/blob/master/README.md
           tickformat: '%Y-%m',
-          tickvals: ['2022-01', '2022-02', '2022-03', '2022-04', '2022-05'],
+          tickvals: xTickvals,
         },
-        width:'1500',
+        width: '1500',
         yaxis: {
           zeroline: false,
           title: {
@@ -160,10 +97,13 @@ export default {
       };
 
       Plotly.newPlot('graph', data, layout, { showSendToCloud: false });
+
+      myPlot.on('plotly_click', function (data) {
+        console.log(data);
+      });
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
