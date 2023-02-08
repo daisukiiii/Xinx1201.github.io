@@ -41,7 +41,7 @@ export default {
 
       // x轴显示的区间范围
       let xTickvals = this.formatXaxis(Object.keys(listData));
-      console.log(xTickvals);
+
       var myPlot = document.getElementById('graph');
       let rows = dataList;
       function unpack(rows, key) {

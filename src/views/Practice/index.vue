@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Lock class="lock" @login="login" v-show="!isLogin" />
     <el-tabs type="border-card" class="tabs-container">
       <el-tab-pane v-for="item in tabs" :key="item.key">
         <span slot="label"><i :class="item.icon"></i> {{ item.name }}</span>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import Lock from './Lock.vue';
 import Echarts from './Echarts';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
@@ -24,6 +26,7 @@ import ComponentsSkills from './ComponentsSkills';
 export default {
   name: 'Practice',
   components: {
+    Lock,
     Echarts,
     PlotlyJs,
     TodoList,
@@ -33,6 +36,7 @@ export default {
   },
   data() {
     return {
+      isLogin: false,
       tabs: [
         {
           icon: 'el-icon-notebook-2',
@@ -65,11 +69,27 @@ export default {
       ],
     };
   },
-  methods: {},
+
+  mounted() {
+    this.isLogin = window.localStorage.getItem('login');
+  },
+  methods: {
+    login() {
+      this.isLogin = true;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.lock {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: transparent;
+  backdrop-filter: blur(15px); //毛玻璃属性
+}
 .tabs-container {
   height: calc(100vh - 110px);
 }
