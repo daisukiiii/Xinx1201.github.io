@@ -1,7 +1,7 @@
 <template>
   <div class="flex-column flex-center">
     <i class="el-icon-lock icon"></i>
-    <el-form :model="form">
+    <el-form :model="form" @submit.native.prevent>
       <el-form-item :class="error ? 'is-error' : ''">
         <el-input
           clearable
