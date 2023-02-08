@@ -10,7 +10,7 @@
           @clear="error = false"
           @input="error = false"
           placeholder="请输入密码"
-          @keyup.enter="submit"
+          @keyup.enter.native="submit"
           show-password
         ></el-input>
       </el-form-item>
