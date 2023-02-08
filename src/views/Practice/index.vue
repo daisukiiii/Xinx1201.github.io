@@ -71,7 +71,7 @@ export default {
   },
 
   mounted() {
-    this.isLogin = window.localStorage.getItem('login');
+    this.isLogin = JSON.parse(window.localStorage.getItem('login'));
   },
   methods: {
     login() {
