@@ -4,6 +4,7 @@
     <el-tabs type="border-card" class="tabs-container">
       <el-tab-pane v-for="item in tabs" :key="item.key">
         <span slot="label"><i :class="item.icon"></i> {{ item.name }}</span>
+        <Drag v-if="item.key == 'Drag'" />
         <Echarts v-if="item.key == 'Echarts'" />
         <PlotlyJs v-if="item.key == 'PlotlyJs'" />
         <TodoList v-if="item.key == 'TodoList'" />
@@ -17,6 +18,7 @@
 
 <script>
 import Lock from './Lock.vue';
+import Drag from './Drag';
 import Echarts from './Echarts';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
@@ -27,6 +29,7 @@ export default {
   name: 'Practice',
   components: {
     Lock,
+    Drag,
     Echarts,
     PlotlyJs,
     TodoList,
@@ -38,6 +41,11 @@ export default {
     return {
       isLogin: false,
       tabs: [
+        {
+          icon: 'el-icon-rank',
+          name: '拖拽组件',
+          key: 'Drag',
+        },
         {
           icon: 'el-icon-notebook-2',
           name: '代办列表',
