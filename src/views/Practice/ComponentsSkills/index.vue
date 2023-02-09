@@ -9,17 +9,23 @@
     <el-card shadow="hover">
       <TableKeyWord class="individual" />
     </el-card>
+    <!-- 组件三、Css过渡 -->
+    <el-card shadow="hover">
+      <Transition class="individual" />
+    </el-card>
   </div>
 </el-card>
   </div>
 </template>
 <script>
 import FormFlash from './FormFlash.vue';
+import Transition from './Transition.vue';
 import TableKeyWord from './TableKeyWord.vue';
 export default {
   name: 'Components',
   components: {
     FormFlash,
+    Transition,
     TableKeyWord,
   },
   data() {
