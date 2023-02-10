@@ -5,6 +5,7 @@
       ref="multipleTable"
       :data="tableData"
       :span-method="MergerArrowRow"
+      @select-all="selectAll"
       style="width: 100%; height: 100%; overflow: auto"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
@@ -18,7 +19,7 @@
           >
             <span
               v-if="!scope.row.expanded"
-              class="el-icon-caret-right"
+              class="el-icon-arrow-right"
               style="cursor: pointer"
               @click="onClickOpen(scope.row)"
             >
@@ -26,7 +27,7 @@
             </span>
             <span
               v-else
-              class="el-icon-caret-bottom"
+              class="el-icon-arrow-down"
               style="cursor: pointer"
               @click="onClickOpen(scope.row)"
             >
@@ -48,6 +49,7 @@ export default {
   name: 'TableTree',
   data() {
     return {
+      isSelectAll: false,
       tableData: [
         {
           id: 1,
@@ -55,7 +57,7 @@ export default {
           expanded: false,
           children: [
             {
-              id: 31,
+              id: 11,
               date: '2016-05-01',
               name: '王小虎',
             },
@@ -67,7 +69,7 @@ export default {
           expanded: false,
           children: [
             {
-              id: 31,
+              id: 21,
               date: '2016-05-01',
               name: '王小虎',
             },
@@ -92,6 +94,32 @@ export default {
     onClickOpen(row) {
       row.expanded = !row.expanded;
       this.$refs.multipleTable.toggleRowExpansion(row);
+    },
+
+    // 表头全选
+    selectAll(val) {
+      this.isSelectAll = !this.isSelectAll;
+      let checkedLength = val.length;
+      // 全选
+      if (this.isSelectAll) {
+        val.forEach((item) => {
+          if (item.children && item.children.length > 0) {
+            item.children.forEach((citem) => {
+              this.$refs.multipleTable.toggleRowSelection(citem, true);
+              ++checkedLength;
+            });
+          }
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+        checkedLength = 0;
+      }
+      this.checkedLength = checkedLength;
+      // 子表选中数据操作
+      this.multipleSelection = this.$refs.multipleTable.selection;
+      this.sonSelection = this.multipleSelection.filter(
+        (item) => item.children == undefined
+      );
     },
     MergerArrowRow({ row, column, rowIndex, columnIndex }) {
       // 如果该行是有children的父行。 进行合并行
