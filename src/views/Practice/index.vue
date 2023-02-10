@@ -42,14 +42,14 @@ export default {
       isLogin: false,
       tabs: [
         {
-          icon: 'el-icon-rank',
-          name: '拖拽组件',
-          key: 'Drag',
-        },
-        {
           icon: 'el-icon-notebook-2',
           name: '代办列表',
           key: 'TodoList',
+        },
+        {
+          icon: 'el-icon-rank',
+          name: '拖拽组件',
+          key: 'Drag',
         },
         {
           name: '防抖节流',
