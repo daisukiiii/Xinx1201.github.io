@@ -9,7 +9,11 @@
     <el-card shadow="hover">
       <TableKeyWord class="individual" />
     </el-card>
-    <!-- 组件三、Css过渡 -->
+    <!-- 组件三、表格树形数据 -->
+    <el-card shadow="hover">
+      <TableTree class="individual " />
+    </el-card>
+    <!-- 组件四、Css过渡 -->
     <el-card shadow="hover">
       <Transition class="individual" />
     </el-card>
@@ -19,12 +23,14 @@
 </template>
 <script>
 import FormFlash from './FormFlash.vue';
+import TableTree from './TableTree.vue';
 import Transition from './Transition.vue';
 import TableKeyWord from './TableKeyWord.vue';
 export default {
   name: 'Components',
   components: {
     FormFlash,
+    TableTree,
     Transition,
     TableKeyWord,
   },
