@@ -5,7 +5,9 @@
     <div :class="show ? 'aside left' : 'aside right'">
       <!-- 侧边按钮 -->
       <div class="asideBtn" @click="show = !show">
-        <i :class="show ? 'el-icon-arrow-right' : 'el-icon-arrow-left'" />
+        <i
+          :class="show ? 'icon el-icon-arrow-right' : 'icon el-icon-arrow-left'"
+        />
       </div>
     </div>
   </div>
@@ -47,6 +49,10 @@ export default {
     right: -22px;
   }
 
+  .icon {
+    z-index: 1;
+  }
+
   // 侧边栏展开/关闭按钮
   .asideBtn {
     position: absolute;
@@ -58,6 +64,16 @@ export default {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    &:before {
+      content: '';
+      position: absolute;
+      right: 0px;
+      top: calc(50% - 50px / 2);
+      width: 20px;
+      height: 50px;
+      background-color: #ddd;
+    }
   }
 }
 </style>
