@@ -7,13 +7,14 @@
       :span-method="MergerArrowRow"
       @select-all="selectAll"
       style="width: 100%; height: 100%; overflow: auto"
-      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+      :tree-props="{ children: 'children' }"
     >
       <el-table-column prop="date" align="center" label="日期">
       </el-table-column>
       <el-table-column prop="name" align="center" label="姓名">
         <template slot-scope="scope">
-          <div
+          <div v-if="!scope.row.show">
+                      <div
             style="text-align: left"
             v-if="scope.row.children && scope.row.children.length"
           >
@@ -37,6 +38,10 @@
           <div v-else>
             {{ scope.row.name }}
           </div>
+          </div>
+          <div v-else>
+            {{scope.row.name}}
+          </div>
         </template>
       </el-table-column>
       <el-table-column type="selection"> </el-table-column>
@@ -58,8 +63,16 @@ export default {
           children: [
             {
               id: 11,
-              date: '2016-05-01',
+              date: '2016-05-11',
+              show:true,
               name: '王小虎',
+              children: [
+                {
+                  id: 111,
+                  date: '2016-05-12',
+                  name: '王小虎',
+                },
+              ],
             },
           ],
         },
@@ -122,6 +135,7 @@ export default {
       );
     },
     MergerArrowRow({ row, column, rowIndex, columnIndex }) {
+      if(row.show)  return 
       // 如果该行是有children的父行。 进行合并行
       if (row.children) {
         if (columnIndex == 1) {
