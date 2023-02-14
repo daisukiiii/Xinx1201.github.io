@@ -6,6 +6,7 @@
       :data="tableData"
       :span-method="MergerArrowRow"
       @select-all="selectAll"
+      @select="select"
       style="width: 100%; height: 100%; overflow: auto"
       :tree-props="{ children: 'children' }"
     >
@@ -14,33 +15,33 @@
       <el-table-column prop="name" align="center" label="姓名">
         <template slot-scope="scope">
           <div v-if="!scope.row.show">
-                      <div
-            style="text-align: left"
-            v-if="scope.row.children && scope.row.children.length"
-          >
-            <span
-              v-if="!scope.row.expanded"
-              class="el-icon-arrow-right"
-              style="cursor: pointer"
-              @click="onClickOpen(scope.row)"
+            <div
+              style="text-align: left"
+              v-if="scope.row.children && scope.row.children.length"
             >
-              {{ scope.row.type }}
-            </span>
-            <span
-              v-else
-              class="el-icon-arrow-down"
-              style="cursor: pointer"
-              @click="onClickOpen(scope.row)"
-            >
-              {{ scope.row.type }}
-            </span>
+              <span
+                v-if="!scope.row.expanded"
+                class="el-icon-arrow-right"
+                style="cursor: pointer"
+                @click="onClickOpen(scope.row)"
+              >
+                {{ scope.row.type }}
+              </span>
+              <span
+                v-else
+                class="el-icon-arrow-down"
+                style="cursor: pointer"
+                @click="onClickOpen(scope.row)"
+              >
+                {{ scope.row.type }}
+              </span>
+            </div>
+            <div v-else>
+              {{ scope.row.name }}
+            </div>
           </div>
           <div v-else>
             {{ scope.row.name }}
-          </div>
-          </div>
-          <div v-else>
-            {{scope.row.name}}
           </div>
         </template>
       </el-table-column>
@@ -64,7 +65,7 @@ export default {
             {
               id: 11,
               date: '2016-05-11',
-              show:true,
+              show: true,
               name: '王小虎',
               children: [
                 {
@@ -109,33 +110,33 @@ export default {
       this.$refs.multipleTable.toggleRowExpansion(row);
     },
 
-    // 表头全选
-    selectAll(val) {
-      this.isSelectAll = !this.isSelectAll;
-      let checkedLength = val.length;
-      // 全选
-      if (this.isSelectAll) {
-        val.forEach((item) => {
-          if (item.children && item.children.length > 0) {
-            item.children.forEach((citem) => {
-              this.$refs.multipleTable.toggleRowSelection(citem, true);
-              ++checkedLength;
-            });
-          }
-        });
-      } else {
-        this.$refs.multipleTable.clearSelection();
-        checkedLength = 0;
+    select(selection, row) {
+      let status = selection.find((x) => x.name == row.name);
+      if (row.children && row.children.length) {
+        this.checkAll(row.children, status);
       }
-      this.checkedLength = checkedLength;
-      // 子表选中数据操作
-      this.multipleSelection = this.$refs.multipleTable.selection;
-      this.sonSelection = this.multipleSelection.filter(
-        (item) => item.children == undefined
-      );
     },
+
+    // 表头全选
+    selectAll() {
+      this.isSelectAll = !this.isSelectAll;
+      // 完全可以使用【递归全选】
+      this.checkAll(this.tableData, this.isSelectAll);
+    },
+
+    // 递归全选
+    checkAll(data, selected) {
+      data.forEach((item) => {
+        this.$refs.multipleTable.toggleRowSelection(item, selected);
+        if (item.children && item.children.length) {
+          this.checkAll(item.children, selected);
+        }
+      });
+    },
+
+    // 合并单元格
     MergerArrowRow({ row, column, rowIndex, columnIndex }) {
-      if(row.show)  return 
+      if (row.show) return;
       // 如果该行是有children的父行。 进行合并行
       if (row.children) {
         if (columnIndex == 1) {
