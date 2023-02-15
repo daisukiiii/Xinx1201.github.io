@@ -1,7 +1,9 @@
 <template>
   <div class="table">
     <el-table
-      :data="tableData"
+      :data="
+        filterZone ? tableData.filter((x) => x.zone == filterZone) : tableData
+      "
       stripe
       style="width: 100%; height: 100%"
       height="73vh"
@@ -11,7 +13,24 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="recordTime" label="记录时间" align="center">
       </el-table-column>
-      <el-table-column prop="zone" label="区服" align="center">
+      <el-table-column align="center">
+        <template slot="header" slot-scope="scope">
+          <div>区服</div>
+          <div>
+            <el-select v-model="filterZone" clearable placeholder="请选择">
+              <el-option
+                v-for="item in [...new Set(tableData.map((x) => x.zone))]"
+                :key="item"
+                :label="item"
+                :value="item"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </template>
+        <template slot-scope="scope">
+          {{ scope.row.zone }}
+        </template>
       </el-table-column>
       <el-table-column prop="server" label="服务器" align="center">
       </el-table-column>
@@ -22,7 +41,7 @@
           <span v-html="$options.filters.filterKeyWord(scope.row.type)"></span>
         </template>
       </el-table-column>
-      <el-table-column prop="endTime" label="刷马时间" align="center">
+      <el-table-column prop="endTime" label="刷马时间" sortable align="center">
         <template slot-scope="scope">
           <span v-if="scope.row.overTime"
             >{{ scope.row.endTime }}<i class="danger">(已刷马)</i></span
@@ -69,6 +88,7 @@ export default {
     return {
       emoticons,
       serverList,
+      filterZone: '', // 筛选大区
       multipleSelection: [],
     };
   },
