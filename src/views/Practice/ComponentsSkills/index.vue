@@ -17,11 +17,16 @@
     <el-card shadow="hover">
       <Transition class="individual" />
     </el-card>
+    <!-- 组件五、Loading -->
+    <el-card shadow="hover">
+      <Loading class="individual" />
+    </el-card>
   </div>
 </el-card>
   </div>
 </template>
 <script>
+import Loading from './Loading.vue'
 import FormFlash from './FormFlash.vue';
 import TableTree from './TableTree.vue';
 import Transition from './Transition.vue';
@@ -29,6 +34,7 @@ import TableKeyWord from './TableKeyWord.vue';
 export default {
   name: 'Components',
   components: {
+    Loading,
     FormFlash,
     TableTree,
     Transition,
