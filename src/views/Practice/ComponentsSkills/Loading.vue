@@ -1,9 +1,8 @@
 <template>
-  <div class="container">
-    <div class="flex-row flex-between">
-      <el-button class="w100" @click="onClickLoading">Loading</el-button>
-    </div>
+  <div>
+    <el-button class="flex-row" @click="onClickLoading">Loading</el-button>
     <el-table
+      class="table"
       :data="tableData"
       v-loading="loading"
       :element-loading-text="loadingText"
@@ -35,10 +34,6 @@ export default {
         },
         {
           date: '2016-05-01',
-          name: '王小虎',
-        },
-        {
-          date: '2016-05-03',
           name: '王小虎',
         },
       ],
@@ -82,8 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  display: flex;
-  flex-direction: column;
+.table {
+  overflow: auto;
 }
 </style>
