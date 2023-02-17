@@ -9,6 +9,7 @@
         <PlotlyJs v-if="item.key == 'PlotlyJs'" />
         <TodoList v-if="item.key == 'TodoList'" />
         <Websocket v-if="item.key == 'Websocket'" />
+        <TableTree v-if="item.key == 'TableTree'" />
         <DebounceThrottle v-if="item.key == 'DebounceThrottle'" />
         <ComponentsSkills v-if="item.key == 'ComponentsSkills'" />
       </el-tab-pane>
@@ -23,6 +24,7 @@ import Echarts from './Echarts';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
 import Websocket from './Websocket';
+import TableTree from './TableTree';
 import DebounceThrottle from './DebounceThrottle';
 import ComponentsSkills from './ComponentsSkills';
 export default {
@@ -34,6 +36,7 @@ export default {
     PlotlyJs,
     TodoList,
     Websocket,
+    TableTree,
     DebounceThrottle,
     ComponentsSkills,
   },
@@ -73,6 +76,11 @@ export default {
           icon: 'el-icon-eleme',
           name: 'ElementUI相关',
           key: 'ComponentsSkills',
+        },
+        {
+          icon: 'el-icon-eleme',
+          name: '表格树形结构',
+          key: 'TableTree',
         },
       ],
     };
