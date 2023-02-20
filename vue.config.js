@@ -5,7 +5,8 @@ function resolve (dir) {
 }
 
 module.exports = {
-  publicPath: '/',
+  outputDir: 'dist',
+  publicPath: process.env.NODE_ENV === 'production' ? '/Xinx1201.github.io/' : '/',
   devServer: {
     // host: "localhost",
     port: 8090, // 端口号
