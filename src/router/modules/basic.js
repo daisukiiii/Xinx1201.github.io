@@ -1,9 +1,10 @@
 import Layout from '@/Layout'
+import env from '@/utils/env.js'
 
 export default {
   path: '/',
   component: Layout,
-  redirect: 'Fame',
+  redirect: env.isLocal?'Practice':'Fame',
   children: [
     {
       path: '/Fame',
