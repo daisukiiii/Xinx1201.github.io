@@ -8,8 +8,8 @@
     :expand-row-keys="expands"
     @expand-change="expandSelect"
     style="width: 100%"
-  > <el-table-column prop="id" label="id" width="120">
-    </el-table-column>
+  >
+    <el-table-column prop="id" label="ID" width="80"> </el-table-column>
     <el-table-column prop="date" label="日期" width="200">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
@@ -18,7 +18,7 @@
         <template v-else>{{ scope.row.date }}</template>
       </template>
     </el-table-column>
-    <el-table-column prop="name" label="姓名" width="180">
+    <el-table-column prop="name" label="姓名" width="200">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
           <el-input clearable v-model="scope.row.name"></el-input>
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     // 只允许展开一行
-    expandSelect(row){
+    expandSelect(row) {
       this.expands = [];
     },
     onClickAdd(row) {
@@ -108,7 +108,7 @@ export default {
       if (row.children && row.children.length) {
         // 防止id重复导致前端报错
         // 每次都取数组中最后一位的id 自增
-        let num = row.children[row.children.length-1].id.split(':')[1]
+        let num = row.children[row.children.length - 1].id.split(':')[1];
         row.children.push({
           id: `${row.id}:${++num}`,
           isSecond: true,
@@ -196,14 +196,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-::v-deep .el-table__row {
-  .el-table__indent {
-    display: flex;
-  }
-}
-::v-deep .el-table__placeholder {
-  height: 0px !important;
-  width: 0px !important;
-}
-</style>
+<style lang="scss" scoped></style>
