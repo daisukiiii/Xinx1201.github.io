@@ -2,7 +2,15 @@
   <div class="table">
     <el-table
       :data="
-        filterZone ? tableData.filter((x) => x.zone == filterZone) : tableData
+        filterZone
+          ? filterServer
+            ? tableData
+                .filter((x) => x.zone == filterZone)
+                .filter((x) => x.server == filterServer)
+            : tableData.filter((x) => x.zone == filterZone)
+          : filterServer
+          ? tableData.filter((x) => x.server == filterServer)
+          : tableData
       "
       stripe
       style="width: 100%; height: 100%"
@@ -17,7 +25,12 @@
         <template slot="header" slot-scope="scope">
           <div>区服</div>
           <div>
-            <el-select v-model="filterZone" clearable placeholder="请选择">
+            <el-select
+              v-model="filterZone"
+              filterable
+              clearable
+              placeholder="请选择"
+            >
               <el-option
                 v-for="item in [...new Set(tableData.map((x) => x.zone))]"
                 :key="item"
@@ -33,6 +46,34 @@
         </template>
       </el-table-column>
       <el-table-column prop="server" label="服务器" align="center">
+        <template slot="header" slot-scope="scope">
+          <div>服务器</div>
+          <div>
+            <el-select
+              v-model="filterServer"
+              filterable
+              clearable
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="item in filterZone
+                  ? [...new Set(tableData.map((x) => x.server))].filter((x) =>
+                      serverList
+                        .find((x) => x.zone == filterZone)
+                        .servers.includes(x)
+                    )
+                  : [...new Set(tableData.map((x) => x.server))]"
+                :key="item"
+                :label="item"
+                :value="item"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </template>
+        <template slot-scope="scope">
+          {{ scope.row.server }}
+        </template>
       </el-table-column>
       <el-table-column prop="map" label="地点" align="center">
       </el-table-column>
@@ -89,6 +130,7 @@ export default {
       emoticons,
       serverList,
       filterZone: '', // 筛选大区
+      filterServer: '', // 筛选服务器
       multipleSelection: [],
     };
   },
@@ -96,6 +138,7 @@ export default {
     // 去除筛选项
     cleanFilter() {
       this.filterZone = '';
+      this.filterServer = '';
     },
     // 删除线
     delLine({ row, column, rowIndex, columnIndex }) {
