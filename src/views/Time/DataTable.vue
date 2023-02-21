@@ -93,6 +93,10 @@ export default {
     };
   },
   methods: {
+    // 去除筛选项
+    cleanFilter() {
+      this.filterZone = '';
+    },
     // 删除线
     delLine({ row, column, rowIndex, columnIndex }) {
       if (row.overTime == 5) {

@@ -234,6 +234,8 @@ export default {
     },
     // 记录信息
     onClickRecord() {
+      // 清除筛选记录
+      this.$refs.table.cleanFilter();
       // 重置记录分钟数
       this.intervalTime = '';
       // 添加信息
