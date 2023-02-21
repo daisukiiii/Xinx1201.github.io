@@ -6,8 +6,10 @@
     row-key="id"
     :tree-props="{ children: 'children' }"
     :expand-row-keys="expands"
+    @expand-change="expandSelect"
     style="width: 100%"
-  >
+  > <el-table-column prop="id" label="id" width="120">
+    </el-table-column>
     <el-table-column prop="date" label="日期" width="200">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
@@ -97,12 +99,18 @@ export default {
     };
   },
   methods: {
-    onClickAdd(row) {
+    // 只允许展开一行
+    expandSelect(row){
       this.expands = [];
+    },
+    onClickAdd(row) {
       this.expands.push(row.id);
-      if (row.children) {
+      if (row.children && row.children.length) {
+        // 防止id重复导致前端报错
+        // 每次都取数组中最后一位的id 自增
+        let num = row.children[row.children.length-1].id.split(':')[1]
         row.children.push({
-          id: `${row.id}:${row.children.length}`,
+          id: `${row.id}:${++num}`,
           isSecond: true,
           date: '',
           name: '',
@@ -111,7 +119,7 @@ export default {
       } else {
         this.$set(row, 'children', []);
         row.children.push({
-          id: `${row.id}:${row.children.length}`,
+          id: `${row.id}:1`,
           isSecond: true,
           date: '',
           name: '',
