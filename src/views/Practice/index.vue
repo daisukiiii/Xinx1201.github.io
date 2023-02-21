@@ -123,5 +123,10 @@ export default {
 }
 .tabs-container {
   height: calc(100vh - 110px);
+
+  ::v-deep .el-tabs__content {
+    height: calc(100vh - 180px);
+    overflow: auto;
+  }
 }
 </style>

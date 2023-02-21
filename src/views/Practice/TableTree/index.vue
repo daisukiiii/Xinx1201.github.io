@@ -7,9 +7,8 @@
     :tree-props="{ children: 'children' }"
     :expand-row-keys="expands"
     @expand-change="expandSelect"
-    style="width: 100%"
   >
-    <el-table-column prop="id" label="ID" width="80"> </el-table-column>
+    <el-table-column prop="id" label="ID" width="120"> </el-table-column>
     <el-table-column prop="date" label="日期" width="200">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
