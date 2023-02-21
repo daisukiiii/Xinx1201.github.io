@@ -3,15 +3,15 @@
     :data="tableData"
     :cell-style="{ textAlign: 'center' }"
     :header-cell-style="{ textAlign: 'center' }"
-    row-key="date"
+    row-key="id"
     :tree-props="{ children: 'children' }"
     :expand-row-keys="expands"
     style="width: 100%"
   >
-    <el-table-column prop="date" label="日期" width="180">
+    <el-table-column prop="date" label="日期" width="200">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
-          <el-input v-model="scope.row.date"></el-input>
+          <el-input clearable v-model="scope.row.date"></el-input>
         </template>
         <template v-else>{{ scope.row.date }}</template>
       </template>
@@ -19,19 +19,19 @@
     <el-table-column prop="name" label="姓名" width="180">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
-          <el-input v-model="scope.row.name"></el-input>
+          <el-input clearable v-model="scope.row.name"></el-input>
         </template>
         <template v-else>{{ scope.row.name }}</template>
       </template>
-    </el-table-column></el-table-column>
+    </el-table-column>
     <el-table-column prop="address" label="地址">
       <template slot-scope="scope">
         <template v-if="scope.row.isEdit">
-          <el-input v-model="scope.row.address"></el-input>
+          <el-input clearable v-model="scope.row.address"></el-input>
         </template>
         <template v-else>{{ scope.row.address }}</template>
       </template>
-    </el-table-column></el-table-column>
+    </el-table-column>
     <el-table-column label="操作">
       <template slot-scope="scope">
         <el-button
@@ -59,7 +59,9 @@
           v-if="scope.row.isEdit"
           >取消</el-button
         >
-        <el-button size="mini" type="danger">删除</el-button>
+        <el-button size="mini" type="danger" @click="onClickRemove(scope.row)"
+          >删除</el-button
+        >
       </template>
     </el-table-column>
   </el-table>
@@ -70,7 +72,7 @@ export default {
   name: 'TableTree',
   data() {
     return {
-      source:undefined, // 源数据
+      source: undefined, // 源数据
       expands: [],
       tableData: [
         {
@@ -97,20 +99,19 @@ export default {
   methods: {
     onClickAdd(row) {
       this.expands = [];
-      this.expands.push(row.date);
-      console.log(row);
+      this.expands.push(row.id);
       if (row.children) {
-        console.log('当前数据有孩子节点，直接push进去一个空对象');
         row.children.push({
+          id: `${row.id}:${row.children.length}`,
           isSecond: true,
           date: '',
           name: '',
           address: '',
         });
       } else {
-        console.log('当前数据没有孩子，初始化children,并push进去一个空对象');
         this.$set(row, 'children', []);
         row.children.push({
+          id: `${row.id}:${row.children.length}`,
           isSecond: true,
           date: '',
           name: '',
@@ -125,19 +126,76 @@ export default {
     },
 
     // 取消操作
-    onClickCancel(row){
+    onClickCancel(row) {
       // 取消编辑
       this.$set(row, 'isEdit', false);
       // 并且恢复原来的值
-      console.log('row',row);
-
+      if (row.isSecond) {
+        // 如果是取消第二行的数据 走该逻辑
+        Object.assign(row, this.source);
+        row.isEdit = false;
+      } else {
+        let index = this.tableData.findIndex((x) => x.id == row.id);
+        let source = this.source;
+        source.isEdit = false;
+        this.tableData.splice(index, 1, source);
+      }
     },
-    
-    onClickFinish(row){
+
+    onClickFinish(row) {
       this.$set(row, 'isEdit', false);
-    }
+    },
+
+    // 删除行
+    onClickRemove(row) {
+      this.$confirm('此操作将删除数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(() => {
+          if (row.isSecond) {
+            // 如果是删除第二行的数据 走该逻辑
+            // id 是固定的，所以可以根据id删除对应的数据
+            this.tableData.forEach((item, index) => {
+              if (item.children && item.children.length) {
+                let sourceIndex = item.children.findIndex(
+                  (x) => x.id == row.id
+                );
+                // 找到行
+                if (sourceIndex != -1) {
+                  this.tableData[index].children.splice(sourceIndex, 1);
+                }
+              }
+            });
+          } else {
+            let index = this.tableData.findIndex((x) => x.id == row.id);
+            this.tableData.splice(index, 1);
+          }
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除',
+          });
+        });
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::v-deep .el-table__row {
+  .el-table__indent {
+    display: flex;
+  }
+}
+::v-deep .el-table__placeholder {
+  height: 0px !important;
+  width: 0px !important;
+}
+</style>

@@ -1,8 +1,13 @@
 <template>
   <div>
     <Lock class="lock" @login="login" v-show="!isLogin" />
-    <el-tabs type="border-card" class="tabs-container">
-      <el-tab-pane v-for="item in tabs" :key="item.key">
+    <el-tabs
+      v-model="activeName"
+      @tab-click="handleClick"
+      type="border-card"
+      class="tabs-container"
+    >
+      <el-tab-pane v-for="item in tabs" :name="item.name" :key="item.key">
         <span slot="label"><i :class="item.icon"></i> {{ item.name }}</span>
         <Drag v-if="item.key == 'Drag'" />
         <Echarts v-if="item.key == 'Echarts'" />
@@ -42,6 +47,7 @@ export default {
   },
   data() {
     return {
+      activeName: '代办列表',
       isLogin: false,
       tabs: [
         {
@@ -87,11 +93,20 @@ export default {
   },
 
   mounted() {
+    // 恢复点击项
+    let check = window.localStorage.getItem('practiceCheck');
+    if (check) {
+      this.activeName = JSON.parse(check);
+    }
     this.isLogin = JSON.parse(window.localStorage.getItem('login'));
   },
   methods: {
     login() {
       this.isLogin = true;
+    },
+    // 保存当前点击项
+    handleClick(tab) {
+      window.localStorage.setItem('practiceCheck', JSON.stringify(tab.name));
     },
   },
 };
