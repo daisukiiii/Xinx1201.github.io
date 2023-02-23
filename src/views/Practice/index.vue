@@ -17,31 +17,34 @@
         <TableTree v-if="item.key == 'TableTree'" />
         <DebounceThrottle v-if="item.key == 'DebounceThrottle'" />
         <ComponentsSkills v-if="item.key == 'ComponentsSkills'" />
+        <Communication v-if="item.key == 'Communication'" />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
-import Lock from './Lock.vue';
 import Drag from './Drag';
+import Lock from './Lock.vue';
 import Echarts from './Echarts';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
 import Websocket from './Websocket';
 import TableTree from './TableTree';
+import Communication from './Communication';
 import DebounceThrottle from './DebounceThrottle';
 import ComponentsSkills from './ComponentsSkills';
 export default {
   name: 'Practice',
   components: {
-    Lock,
     Drag,
+    Lock,
     Echarts,
     PlotlyJs,
     TodoList,
     Websocket,
     TableTree,
+    Communication,
     DebounceThrottle,
     ComponentsSkills,
   },
@@ -87,6 +90,11 @@ export default {
           icon: 'el-icon-eleme',
           name: '表格树形结构',
           key: 'TableTree',
+        },
+        {
+          icon: 'el-icon-phone-outline',
+          name: '组件通讯',
+          key: 'Communication',
         },
       ],
     };
