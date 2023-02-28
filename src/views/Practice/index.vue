@@ -9,6 +9,7 @@
     >
       <el-tab-pane v-for="item in tabs" :name="item.name" :key="item.key">
         <span slot="label"><i :class="item.icon"></i> {{ item.name }}</span>
+        <VChart v-if="item.key == 'VChart'" />
         <Echarts v-if="item.key == 'Echarts'" />
         <PlotlyJs v-if="item.key == 'PlotlyJs'" />
         <TodoList v-if="item.key == 'TodoList'" />
@@ -24,6 +25,7 @@
 
 <script>
 import Lock from './Lock.vue';
+import VChart from './VChart';
 import Echarts from './Echarts';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
@@ -36,6 +38,7 @@ export default {
   name: 'Practice',
   components: {
     Lock,
+    VChart,
     Echarts,
     PlotlyJs,
     TodoList,
@@ -58,6 +61,11 @@ export default {
         {
           name: '防抖节流',
           key: 'DebounceThrottle',
+        },
+        {
+          icon: 'el-icon-s-data',
+          name: 'VChart图表',
+          key: 'VChart',
         },
         {
           icon: 'el-icon-s-data',
