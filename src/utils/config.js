@@ -6,6 +6,9 @@ export default {
     }
   },
   DATE: {
+    HH: 'HH',
+    MM: 'mm',
+    SS: 'ss',
     HM: 'HH:mm',
     HMS: 'HH:mm:ss',
     FULL_DATE_TIME: 'YYYY-MM-DD HH:mm:ss',

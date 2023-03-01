@@ -8,7 +8,7 @@ import Copyable from '@/components/Copyable'
 // 引入Element-UI组件
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import * as filters from '@/utils/filters.js' // 过滤器
+import * as filters from '@/utils/filters' // 过滤器
 import '@/assets/style/font.scss' // 引入全局字体
 
 // 引入Echarts

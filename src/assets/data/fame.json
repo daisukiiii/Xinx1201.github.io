@@ -4,8 +4,9 @@
   "odd": {
     "title": "单数时间点阶段",
     "desc": "百溪(整)、楚州(半)",
-    "Zero": {
+    "zero": {
       "title": "百溪",
+      "url": "https://s2.loli.net/2022/12/10/UmetOT8SyQZcRzA.png",
       "desc": "单数小时,每整点进行",
       "stages": [
         {
@@ -50,8 +51,9 @@
         }
       ]
     },
-    "Half": {
+    "half": {
       "title": "楚州",
+      "url": "https://s2.loli.net/2022/12/10/qjx3lHpatF2I4SX.png",
       "desc": "单数小时,每半点进行",
       "stages": [
         {
@@ -95,8 +97,9 @@
   "even": {
     "title": "双数时间点阶段",
     "desc": "烂柯山(整)晟江(半)",
-    "Zero": {
+    "zero": {
       "title": "烂柯山",
+      "url": "https://s2.loli.net/2022/12/10/a79gsqcUAdeZiY3.png",
       "desc": "双数小时,每整点进行",
       "stages": [
         {
@@ -151,8 +154,9 @@
         }
       ]
     },
-    "Half": {
+    "half": {
       "title": "晟江",
+      "url": "https://s2.loli.net/2022/12/10/ry6b9RSpBNdo75k.png",
       "desc": "双数小时,每半点进行",
       "stages": [
         {

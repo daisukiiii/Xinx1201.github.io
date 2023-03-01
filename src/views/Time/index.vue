@@ -72,7 +72,8 @@
 import dayjs from 'dayjs';
 import Operation from './Operation.vue';
 import DataTable from './DataTable.vue';
-import { dateToString, randomInt } from '@/utils';
+import { randomInt } from '@/utils';
+import { dateToString } from '@/utils/filters';
 import horseIcon from '@/assets/data/horseIcon.json';
 export default {
   name: 'Time',
