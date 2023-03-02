@@ -7,6 +7,7 @@
     @row-click="rowClick"
     height="80vh"
     ref="table"
+    :span-method="objectSpanMethod"
   >
     <el-table-column align="center" prop="horse" label="马驹" width="180">
       <template slot-scope="scope">
@@ -56,7 +57,6 @@
 
 <script>
 import Detail from './Detail.vue';
-import { filterKeyWord } from '@/utils';
 import horseMapOptions from '@/assets/data/horseMap.json';
 export default {
   name: 'UIDDataTable',
@@ -107,6 +107,47 @@ export default {
       // 复制uid不允许展开行
       if (column.property == 'uid') return;
       this.$refs.table.toggleRowExpansion(row);
+    },
+
+    // objectSpanMethod方法
+    // 默认接受四个值 { 当前行的值, 当前列的值, 行的下标, 列的下标 }
+    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        console.log(row);
+        let spanArr = this.getSpanArr(this.tableData, 'horse', 'suffix');
+        const _row = spanArr[rowIndex];
+        const _col = _row > 0 ? 1 : 0;
+        return {
+          rowspan: _row,
+          colspan: _col,
+        };
+      }
+    },
+    // 处理合并行的数据
+    getSpanArr(data, spanKey, suffix) {
+      let that = this;
+      let spanArr = [];
+      let pos = '';
+      for (let i = 0; i < data.length; i++) {
+        if (i === 0) {
+          spanArr.push(1);
+          pos = 0;
+        } else {
+          // 判断当前元素与上一个元素是否相同
+          // 马驹名称&前缀都相同的情况下才合并
+          if (
+            data[i][spanKey] === data[i - 1][spanKey] &&
+            data[i][suffix] === data[i - 1][suffix]
+          ) {
+            spanArr[pos] += 1;
+            spanArr.push(0);
+          } else {
+            spanArr.push(1);
+            pos = i;
+          }
+        }
+      }
+      return spanArr;
     },
   },
 };

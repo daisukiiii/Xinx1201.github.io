@@ -4,7 +4,6 @@
       <template slot-scope="scope">
         <span>{{ scope.row.horse }}</span>
         <span v-if="scope.row.suffix">·{{ scope.row.suffix }}</span>
-        </el-tooltip>
         <span class="doubleRider" v-if="scope.row['双骑']">双</span>
       </template>
     </el-table-column>
@@ -52,7 +51,6 @@
 </template>
 
 <script>
-import { filterKeyWord } from '@/utils';
 export default {
   naem: 'HouseDetail',
   props: {
@@ -64,8 +62,7 @@ export default {
       return {};
     },
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
