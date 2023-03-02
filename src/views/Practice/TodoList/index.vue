@@ -51,6 +51,7 @@
       </div>
       <div
         class="item flex-row"
+        :key="index"
         v-for="(item, index) in items != []
           ? items.filter((x) =>
               this.activeName == 'all'
