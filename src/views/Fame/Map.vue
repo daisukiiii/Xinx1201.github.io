@@ -4,7 +4,7 @@
     <div class="toolbox flex-row flex-between">
       <!-- 当前阶段 -->
       <div class="currentTitle">
-        {{ currentStageTitle }}
+        当前阶段:<span class="currentName">{{ currentStageTitle }}</span>
       </div>
       <!-- 地图名称 -->
       <div class="mapName">
@@ -12,7 +12,7 @@
       </div>
       <!-- 下一阶段 -->
       <div class="nextTitle">
-        {{ nextStageTitle }}
+        下一阶段:<span class="nextName">{{ nextStageTitle }}</span>
       </div>
     </div>
 
@@ -46,6 +46,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    time: {
+      type: Number,
+      default: () => 0,
+    },
   },
   data() {
     return {
@@ -57,11 +61,10 @@ export default {
   },
 
   watch: {
-    stage: {
-      handler(val) {
+    time: {
+      handler() {
         this.getTitle();
       },
-      deep: true,
       immediate: true,
     },
   },

@@ -30,13 +30,6 @@
   .toolbox {
     height: 40px;
     color: #000;
-
-    .currentTitle {
-      color: rgba(255, 0, 0, 0.8);
-    }
-    .nextTitle {
-      color: rgba(11, 189, 135, 0.8);
-    }
     .mapName {
       width: 100%;
       border-top: 1px dashed #eee;
@@ -46,10 +39,19 @@
     }
     .currentTitle,
     .nextTitle {
-      width: 200px;
+      color: #ddd;
+      width: 400px;
       height: 38px;
+      text-align: center;
       line-height: 38px;
       border: 1px dashed #eee;
+
+      .currentName {
+        color: rgba(255, 0, 0, 0.8);
+      }
+      .nextName {
+        color: rgba(11, 189, 135, 0.8);
+      }
     }
   }
 

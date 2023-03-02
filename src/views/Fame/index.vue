@@ -4,7 +4,7 @@
       <TimeLine :time="currentTime" :stage="currentStage" />
     </div>
     <div class="map">
-      <Map :stage="currentStage" />
+      <Map :time="currentTime" :stage="currentStage" />
     </div>
   </div>
 </template>
