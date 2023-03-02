@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <div>
     <el-table
       :data="
         filterZone
@@ -12,14 +12,16 @@
           ? tableData.filter((x) => x.server == filterServer)
           : tableData
       "
-      stripe
-      style="width: 100%; height: 100%"
-      height="73vh"
+      style="width: 100%"
+      height="70vh"
       @selection-change="handleSelectionChange"
       :cell-class-name="delLine"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="recordTime" label="记录时间" align="center">
+      <el-table-column prop="originTime" label="记录时间" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.originTime | dateToString('datetime') }}
+        </template>
       </el-table-column>
       <el-table-column align="center">
         <template slot="header">
@@ -75,8 +77,7 @@
           {{ scope.row.server }}
         </template>
       </el-table-column>
-      <el-table-column prop="map" label="地点" align="center">
-      </el-table-column>
+      <el-table-column prop="map" label="地图" align="center"></el-table-column>
       <el-table-column prop="type" label="类型" align="center">
         <template slot-scope="scope">
           <span v-html="$options.filters.filterKeyWord(scope.row.type)"></span>
@@ -84,10 +85,7 @@
       </el-table-column>
       <el-table-column prop="endTime" label="刷马时间" sortable align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.overTime"
-            >{{ scope.row.endTime }}<i class="danger">(已刷马)</i></span
-          >
-          <span v-else>{{ scope.row.endTime }}</span>
+          {{ scope.row.endTime | dateToString('datetime') }}
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center">
@@ -101,7 +99,7 @@
             icon="el-icon-info"
             icon-color="red"
             title="确定删除该条刷马信息？"
-            @confirm="onDeletRecord(scope.row)"
+            @confirm="onClickDel(scope.row)"
           >
             <el-button size="mini" slot="reference" type="danger"
               >删除</el-button
@@ -114,11 +112,11 @@
 </template>
 
 <script>
-import { filterKeyWord, randomInt } from '@/utils';
-import emoticons from '@/assets/data/emoticons.json';
+import { randomInt } from '@/utils';
 import serverList from '@/assets/data/server.json';
+import emoticons from '@/assets/data/emoticons.json';
 export default {
-  name: 'HorseDataTable',
+  name: 'ForcastDataTable',
   props: {
     tableData: {
       type: Array,
@@ -127,38 +125,37 @@ export default {
   },
   data() {
     return {
-      emoticons,
+      emoticons, // 颜文字表情
       serverList,
+
       filterZone: '', // 筛选大区
       filterServer: '', // 筛选服务器
-      multipleSelection: [],
     };
   },
   methods: {
-    // 去除筛选项
-    cleanFilter() {
-      this.filterZone = '';
-      this.filterServer = '';
-    },
     // 删除线
     delLine({ row, column, rowIndex, columnIndex }) {
       if (row.overTime == 5) {
         return 'del_line';
       }
     },
-    // 批量删除
+    // 多选框
     handleSelectionChange(val) {
-      this.multipleSelection = val;
-      this.$emit('selection', this.multipleSelection);
+      this.$emit('selection', val);
     },
     // 复制
     copy(row) {
       let randomEmoji = this.emoticons[randomInt(0, this.emoticons.length)];
       let oInput = document.createElement('input');
       // 将想要复制的值
-      oInput.value = `【${row.server}】将于${row.endTime.split(' ')[1]}在 ${
-        row.map
-      } 刷新马驹 ${row.type.split('/').join('\\')} ${randomEmoji}`;
+      oInput.value = `【${
+        row.server
+      }】将于 ${this.$options.filters.dateToString(
+        row.endTime,
+        'datetime'
+      )} 在 ${row.map} 刷新马驹 ${row.type
+        .split('/')
+        .join('\\')} ${randomEmoji}`;
       // 页面底部追加输入框
       document.body.appendChild(oInput);
       // 选中输入框
@@ -170,15 +167,15 @@ export default {
       // 复制后移除输入框
       oInput.remove();
     },
-    // 删除
-    onDeletRecord(row) {
+    // 删除信息
+    onClickDel(row) {
       let index = this.tableData.findIndex((x) => x == row);
+      console.log(index);
       this.tableData.splice(index, 1);
     },
   },
 };
 </script>
-
 <style lang="scss">
 .del_line {
   &:after {
@@ -191,11 +188,4 @@ export default {
   }
 }
 </style>
-
-<style lang="scss" scoped>
-.danger {
-  font-style: normal;
-  margin-left: 5px;
-  color: red;
-}
-</style>
+<style lang="scss" scoped></style>

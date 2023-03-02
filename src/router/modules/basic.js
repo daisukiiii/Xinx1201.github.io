@@ -4,7 +4,7 @@ import env from '@/utils/env.js'
 export default {
   path: '/',
   component: Layout,
-  redirect: env.isLocal?'Practice':'Fame',
+  redirect: env.isLocal ? 'Practice' : 'Fame',
   children: [
     {
       path: '/Fame',
@@ -15,11 +15,11 @@ export default {
       }
     },
     {
-      path: '/Time',
-      name: 'Time',
-      component: () => import('@/views/Time'),
+      path: '/Forecast',
+      name: 'Forecast',
+      component: () => import('@/views/Forecast'),
       meta: {
-        title: '刷马时间'
+        title: '刷马预测'
       }
     },
     {
