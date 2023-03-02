@@ -113,7 +113,6 @@ export default {
     // 默认接受四个值 { 当前行的值, 当前列的值, 行的下标, 列的下标 }
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
       if (columnIndex === 0) {
-        console.log(row);
         let spanArr = this.getSpanArr(this.tableData, 'horse', 'suffix');
         const _row = spanArr[rowIndex];
         const _col = _row > 0 ? 1 : 0;
