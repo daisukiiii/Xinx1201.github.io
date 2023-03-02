@@ -70,7 +70,6 @@
 </template>
 
 <script>
-import { filterKeyWord } from '@/utils';
 import horseMapOptions from '@/assets/data/horseMap.json';
 import serverList from '@/assets/data/server.json';
 const genNew = () => ({

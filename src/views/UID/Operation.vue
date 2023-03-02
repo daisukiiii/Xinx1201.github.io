@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { filterKeyWord } from '@/utils';
 import uidOptions from '@/assets/data/uid.json';
 const genNew = () => ({
   onlySeeVariation: false, // 是否仅看变异马驹
