@@ -22,7 +22,7 @@
       <el-table-column prop="recordTime" label="记录时间" align="center">
       </el-table-column>
       <el-table-column align="center">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <div>区服</div>
           <div>
             <el-select
@@ -46,7 +46,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="server" label="服务器" align="center">
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <div>服务器</div>
           <div>
             <el-select

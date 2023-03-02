@@ -11,7 +11,7 @@
     </el-card>
     <!-- 组件三、表格树形数据 -->
     <el-card shadow="hover">
-      <TableTree class="individual " />
+      <TableTree class="individual" />
     </el-card>
     <!-- 组件四、Css过渡 -->
     <el-card shadow="hover">
@@ -22,11 +22,9 @@
       <Loading class="individual" />
     </el-card>
   </div>
-</el-card>
-  </div>
 </template>
 <script>
-import Loading from './Loading.vue'
+import Loading from './Loading.vue';
 import FormFlash from './FormFlash.vue';
 import TableTree from './TableTree.vue';
 import Transition from './Transition.vue';
@@ -50,8 +48,8 @@ export default {
 <style lang="scss" scoped>
 .all {
   width: 100%;
-  
-  .el-card{
+
+  .el-card {
     margin: 10px;
 
     .individual {

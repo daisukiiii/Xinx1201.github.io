@@ -128,14 +128,14 @@ export default {
       }
     },
     onClickEdit(row) {
-      if(this.isEdit){
+      if (this.isEdit) {
         this.$message({
-            type: 'warning',
-            message: '请先保存后在修改!',
-          });
-          return
+          type: 'warning',
+          message: '请先保存后在修改!',
+        });
+        return;
       }
-      this.isEdit = true // 点击修改按钮 后 更改isEdit状态，全局判断是否有再次点击的修改按钮
+      this.isEdit = true; // 点击修改按钮 后 更改isEdit状态，全局判断是否有再次点击的修改按钮
       this.$set(row, 'isEdit', true);
       // 深拷贝
       this.source = JSON.parse(JSON.stringify(row));
@@ -143,7 +143,7 @@ export default {
 
     // 取消操作
     onClickCancel(row) {
-      this.isEdit = false
+      this.isEdit = false;
       // 取消编辑
       this.$set(row, 'isEdit', false);
       // 并且恢复原来的值
@@ -160,7 +160,7 @@ export default {
     },
 
     onClickFinish(row) {
-      this.isEdit = false
+      this.isEdit = false;
       this.$set(row, 'isEdit', false);
     },
 
