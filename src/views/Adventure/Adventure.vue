@@ -98,6 +98,11 @@ export default {
       adventure,
     };
   },
+  computed: {
+    adventureList() {
+      return this.adventure.filter((x) => x.type !== 99);
+    },
+  },
   mounted() {
     // 为每个奇遇添加是否完成的标记
     this.adventure = this.adventure.map((item) => {
@@ -111,10 +116,8 @@ export default {
     form: {
       handler(val) {
         if (val) {
-          // 更换橙武图片
-          this.changeCWColor(val);
-          // 更换黑白路图片
-          this.changeCampColor(val);
+          // 更换对应门派&阵营的图片
+          this.changePic(val);
         }
       },
       deep: true,
@@ -122,103 +125,78 @@ export default {
   },
   methods: {
     onClickIsFinish(item) {
-      this.adventure
-        .filter((x) => x.type !== 99)
-        .find((x) => x.name == item.name).isFinish = !item.isFinish;
+      this.adventureList.find((x) => x.name == item.name).isFinish =
+        !item.isFinish;
     },
 
     check(type) {
       switch (type) {
         case 'all':
           // 勾选全部
-          if (
-            this.adventure
-              .filter((x) => x.type !== 99)
-              .every((x) => x.isFinish == true)
-          ) {
+          if (this.adventureList.every((x) => x.isFinish == true)) {
             this.adventure
               .filter((x) => x.type !== 99)
               .forEach((x) => {
                 x.isFinish = false;
               });
           } else {
-            this.adventure
-              .filter((x) => x.type !== 99)
-              .forEach((x) => {
-                x.isFinish = true;
-              });
+            this.adventureList.forEach((x) => {
+              x.isFinish = true;
+            });
           }
           break;
         case 'normal':
           // 如果全部选中 置为未选中状态
-          if (
-            this.adventure
-              .filter((x) => x.type !== 99)
-              .every((x) => x.isFinish == true)
-          ) {
-            this.adventure
-              .filter((x) => x.type !== 99)
-              .forEach((x) => {
-                x.isFinish = false;
-              });
+          if (this.adventureList.every((x) => x.isFinish == true)) {
+            this.adventureList.forEach((x) => {
+              x.isFinish = false;
+            });
           }
           // 勾选普通奇遇
-          this.adventure
-            .filter((x) => x.type !== 99)
-            .forEach((x) => {
-              if (x.type == 1) {
-                x.isFinish = !x.isFinish;
-              } else {
-                x.isFinish = false;
-              }
-            });
+          this.adventureList.forEach((x) => {
+            if (x.type == 1) {
+              x.isFinish = !x.isFinish;
+            } else {
+              x.isFinish = false;
+            }
+          });
           break;
         case 'perfect':
           // 如果全部选中 置为未选中状态
-          if (
-            this.adventure
-              .filter((x) => x.type !== 99)
-              .every((x) => x.isFinish == true)
-          ) {
-            this.adventure
-              .filter((x) => x.type !== 99)
-              .forEach((x) => {
-                x.isFinish = false;
-              });
+          if (this.adventureList.every((x) => x.isFinish == true)) {
+            this.adventureList.forEach((x) => {
+              x.isFinish = false;
+            });
           }
           // 勾选绝世奇遇
-          this.adventure
-            .filter((x) => x.type !== 99)
-            .forEach((x) => {
-              if (x.type == 0) {
-                x.isFinish = !x.isFinish;
-              } else {
-                x.isFinish = false;
-              }
-            });
+          this.adventureList.forEach((x) => {
+            if (x.type == 0) {
+              x.isFinish = !x.isFinish;
+            } else {
+              x.isFinish = false;
+            }
+          });
           break;
         default:
           break;
       }
     },
 
-    // 阵营图片
-    changeCampColor(val) {
-      let str = `camp_${val.camp.id}_open`;
-      // 黑白路替换掉对应的图片
-      this.adventure.forEach((x) => {
-        if (x.camp) {
-          x.img = x.img.replace(x.img.match(/camp_(\S*)_open/)[0], str);
-        }
-      });
-    },
-
-    changeCWColor(val) {
-      let str = `school_${val.school.id}_open`;
-      // 橙武奇遇替换掉对应的图片
+    changePic(val) {
       this.adventure.forEach((x) => {
         if (x.cw) {
-          x.img = x.img.replace(x.img.match(/school_(\S*)_open/)[0], str);
+          // 橙武奇遇替换掉对应的图片
+          x.img = x.img.replace(
+            x.img.match(/school_(\S*)_open/)[0],
+            `school_${val.school.id}_open`
+          );
+        }
+        if (x.camp) {
+          // 黑白路替换掉对应的图片
+          x.img = x.img.replace(
+            x.img.match(/camp_(\S*)_open/)[0],
+            `camp_${val.camp.id}_open`
+          );
         }
       });
     },

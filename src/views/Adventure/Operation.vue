@@ -125,7 +125,6 @@ export default {
   watch: {
     'form.school': {
       handler(val) {
-        console.log(val);
         if (val) {
           // 改变选中后的颜色
           this.$refs.school.$el.children[0].children[0].style.color = val.color;
@@ -135,7 +134,6 @@ export default {
     },
     'form.camp': {
       handler(val) {
-        console.log(val);
         if (val) {
           // 改变选中后的颜色
           this.$refs.camp.$el.children[0].children[0].style.color = val.color;
