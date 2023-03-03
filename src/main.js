@@ -13,7 +13,10 @@ import '@/assets/style/font.scss' // 引入全局字体
 
 // 引入Echarts
 import * as echarts from 'echarts'
+// 全局打印信息
+import print from '@/utils/print'
 
+Vue.use(print)
 Vue.use(ElementUI)
 Vue.component('Copyable', Copyable)
 Vue.prototype.$dialog = dialog
