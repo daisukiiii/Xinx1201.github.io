@@ -5,6 +5,7 @@
     <!-- 大区 -->
     <el-form-item>
       <el-select
+        filterable
         v-model="form.zone"
         @change="onChangeZone"
         placeholder="请选择大区"
@@ -21,7 +22,7 @@
 
     <!-- 服务器 -->
     <el-form-item>
-      <el-select v-model="form.server" placeholder="请选择服务器">
+      <el-select filterable v-model="form.server" placeholder="请选择服务器">
         <el-option
           v-for="item in serverList"
           :key="item"
@@ -35,6 +36,7 @@
     <!-- 地图 -->
     <el-form-item>
       <el-select
+        filterable
         v-model="form.map"
         @change="onChangeMap"
         placeholder="请选择地图"
@@ -57,7 +59,7 @@
 
     <!-- 马驹类型 -->
     <el-form-item>
-      <el-select v-model="form.type" placeholder="请选择马驹类型">
+      <el-select filterable v-model="form.type" placeholder="请选择马驹类型">
         <el-option
           v-for="item in horseTypeList"
           :key="item"

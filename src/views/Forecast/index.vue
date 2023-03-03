@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="flex-column flex-ai-stretch">
     <!-- 顶部筛选框 -->
-    <Operation @select="select" ref="operation" />
+    <Operation @select="select" ref="operation" class="flex-none" />
     <!-- 中间加减时间 -->
     <Time
       @time="recordTime"
@@ -12,7 +12,11 @@
       class="mgb10"
     />
     <!-- 底部Table -->
-    <DataTable @selection="selection" :tableData="tableData" />
+    <DataTable
+      @selection="selection"
+      :tableData="tableData"
+      class="flex-auto"
+    />
   </div>
 </template>
 
