@@ -1,0 +1,128 @@
+.adventure {
+  width: 100%;
+  height: 100%;
+
+  .containers {
+    width: 1440px;
+    border: 1px solid #ebeef5;
+
+    .box {
+      color: #ccc;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 140px;
+      height: 140px;
+      position: relative;
+      &.box {
+        margin-left: 5px;
+        margin-top: 5px;
+      }
+
+      .first {
+        height: 140px;
+        line-height: 30px;
+        text-align: center;
+        .logo {
+          height: 40%;
+          img {
+            width: 57px;
+            height: 57px;
+          }
+        }
+        .name,
+        .server {
+          font-size: 20px;
+          height: 25%;
+          font-family: 'jx3min', 'jx3', '楷体', '微软雅黑';
+        }
+        .server {
+          font-size: 30px;
+        }
+      }
+
+      .container {
+        height: 140px;
+        line-height: 30px;
+        text-align: center;
+
+        img {
+          height: calc(25px * 0.75);
+          width: calc(114px * 0.75);
+        }
+        .normal,
+        .perfect,
+        .time {
+          line-height: 45px;
+          font-family: 'jx3min', 'jx3';
+
+          .adventure {
+            font-size: 23px;
+          }
+        }
+
+        .normal {
+          color: #b51cad;
+          margin-top: 5px;
+        }
+
+        .perfect {
+          color: #f7b500;
+        }
+        .time {
+          font-size: 25px;
+        }
+      }
+
+      .finish {
+        position: absolute;
+        right: -15%;
+        top: 5%;
+        width: 80px;
+        line-height: 25px;
+        overflow: hidden;
+        font-size: 12px;
+        transform: rotate(45deg);
+        color: #fff;
+        z-index: 99;
+      }
+
+      .check {
+        position: absolute;
+        color: #ae2323;
+        top: -25%;
+        left: 25%;
+        font-size: 150px;
+        font-family: 'jx3min', 'jx3';
+        z-index: 88;
+      }
+
+      &.card {
+        margin: 5px;
+      }
+
+      .bg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .cover {
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        left: 0;
+      }
+
+      .text {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 0px;
+        width: 50%;
+        margin-left: 25%;
+      }
+    }
+  }
+}
