@@ -1,17 +1,7 @@
 <template>
   <div>
     <el-table
-      :data="
-        filterZone
-          ? filterServer
-            ? tableData
-                .filter((x) => x.zone == filterZone)
-                .filter((x) => x.server == filterServer)
-            : tableData.filter((x) => x.zone == filterZone)
-          : filterServer
-          ? tableData.filter((x) => x.server == filterServer)
-          : tableData
-      "
+      :data="filterData"
       style="width: 100%"
       height="70vh"
       @selection-change="handleSelectionChange"
@@ -25,7 +15,7 @@
       </el-table-column>
       <el-table-column align="center">
         <template slot="header">
-          <div>区服</div>
+          <div>大区</div>
           <div>
             <el-select
               v-model="filterZone"
@@ -34,7 +24,7 @@
               placeholder="请选择"
             >
               <el-option
-                v-for="item in [...new Set(tableData.map((x) => x.zone))]"
+                v-for="item in tableFilter(tableData, 'zone')"
                 :key="item"
                 :label="item"
                 :value="item"
@@ -59,12 +49,12 @@
             >
               <el-option
                 v-for="item in filterZone
-                  ? [...new Set(tableData.map((x) => x.server))].filter((x) =>
+                  ? tableFilter(tableData, 'server').filter((x) =>
                       serverList
                         .find((x) => x.zone == filterZone)
                         .servers.includes(x)
                     )
-                  : [...new Set(tableData.map((x) => x.server))]"
+                  : tableFilter(tableData, 'server')"
                 :key="item"
                 :label="item"
                 :value="item"
@@ -131,6 +121,46 @@ export default {
       filterZone: '', // 筛选大区
       filterServer: '', // 筛选服务器
     };
+  },
+  computed: {
+    filterZoneData: function () {
+      return function (item) {
+        return item.filter((x) => x.zone == this.filterZone);
+      };
+    },
+    filterServerData: function () {
+      return function (item) {
+        return item.filter((x) => x.server == this.filterServer);
+      };
+    },
+
+    // 筛选数据逻辑
+    filterData() {
+      // 筛选大区
+      if (this.filterZone) {
+        if (this.filterServer) {
+          return this.filterServerData(this.filterZoneData(this.tableData));
+        } else {
+          return this.filterZoneData(this.tableData);
+        }
+      } else if (this.filterServer) {
+        // 筛选服务器
+        if (this.filterZone) {
+          return this.filterZoneData(this.filterServerData(this.tableData));
+        } else {
+          return this.filterServerData(this.tableData);
+        }
+      } else {
+        return this.tableData;
+      }
+    },
+
+    // 表格内筛选数据
+    tableFilter: function () {
+      return function (data, type) {
+        return [...new Set(data.map((x) => x[type]))];
+      };
+    },
   },
   methods: {
     // 删除线
