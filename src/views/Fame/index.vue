@@ -68,7 +68,6 @@ export default {
   .map {
     width: 970px;
     height: 785px;
-    margin: -5% 5% 0 0;
   }
 }
 </style>
