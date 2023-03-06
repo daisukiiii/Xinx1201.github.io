@@ -52,13 +52,14 @@ export default {
       handler(val) {
         let source = JSON.parse(JSON.stringify(this.tableData));
         let fiveMinutes = 300;
+        let tenMinutes = 600;
         source.forEach((x) => {
           // 超时的情况下 5分钟添加删除线 10分钟删除该条信息
-          let overTime = dayjs(x.endTime).diff(val, 'second');
+          let overTime = dayjs(val).diff(x.endTime, 'second');
           if (overTime == fiveMinutes) {
             source.find((item) => item == x).overTime = 5;
             this.tableData = source;
-          } else if (overTime < 0) {
+          } else if (overTime > tenMinutes) {
             // 超过10分钟 则删除本条信息
             let index = source.findIndex((item) => item == x);
             source.splice(index, 1);

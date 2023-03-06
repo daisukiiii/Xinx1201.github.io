@@ -10,7 +10,6 @@
         <el-input-number
           v-model="form.intervalTime"
           controls-position="right"
-          :min="0"
         ></el-input-number>
         分钟
       </div>

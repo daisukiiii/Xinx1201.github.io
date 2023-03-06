@@ -71,6 +71,7 @@
       <el-table-column prop="type" label="类型" align="center">
         <template slot-scope="scope">
           <span v-html="$options.filters.filterKeyWord(scope.row.type)"></span>
+          <span v-if="scope.row.overTime" class="mgl10 showHorse">(已刷马)</span>
         </template>
       </el-table-column>
       <el-table-column prop="endTime" label="刷马时间" sortable align="center">
@@ -208,6 +209,7 @@ export default {
 </script>
 <style lang="scss">
 .del_line {
+  color: #CCC;
   &:after {
     content: no-open-quote;
     position: absolute;
@@ -218,4 +220,8 @@ export default {
   }
 }
 </style>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.showHorse{
+  color: red;
+}
+</style>
