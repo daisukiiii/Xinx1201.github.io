@@ -1,6 +1,6 @@
 <template>
   <div class="echart">
-    <el-button class="btn" @click="refresh"> 更新数据 </el-button>
+    <el-button class="btn" @click="onClickBlink"> 闪烁 </el-button>
     <VChart
       autoresize
       style="width: 100%; height: 75vh"
@@ -14,32 +14,50 @@
 <script>
 import VChart from '@/components/echarts/VChart.vue';
 
-const yAxis0 = {
-  type: 'value',
-  name: '次数',
-  minInterval: 1,
-  axisLabel: {
-    formatter: '{value}',
-  },
-};
-
 const chartSettings = {
   eChartOptions: {
+    color: ['#008ED0', '#43FFD6'],
     tooltip: {
+      show: true,
       trigger: 'axis',
       axisPointer: {
         type: 'line',
       },
     },
+    legend: {
+      orient: 'horizontal',
+      left: 'right',
+      top: 'top',
+    },
     xAxis: {
       type: 'category',
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      axisTick: {
+        show: false,
+      },
     },
-    yAxis: [yAxis0],
+    grid: {
+      top: '6%',
+      bottom: '10%',
+      left: '10%',
+      right: '5%',
+    },
+    yAxis: {
+      type: 'value',
+      axisTick: {
+        show: false,
+      },
+    },
     series: [
       {
-        data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line',
+        name: '测试',
+        data: [120, 200, 150, 80, 50, 110, 130],
+        type: 'bar',
+      },
+      {
+        name: 'test',
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: 'bar',
       },
     ],
   },
@@ -55,7 +73,10 @@ export default {
   },
   data() {
     return {
+      highlightText: 'Fri',
+      originOptions: null,
       eChartOptions: null,
+      timer: undefined,
       loading: false,
       loadingOpt: {
         text: 'loading',
@@ -81,28 +102,35 @@ export default {
     };
   },
   mounted() {
+    clearInterval(this.timer);
     this.eChartOptions = chartSettings.eChartOptions;
+    // 深拷贝 - 用于闪烁显示
+    this.originOptions = JSON.parse(JSON.stringify(this.eChartOptions));
   },
   methods: {
-    refresh() {
-      this.loading = true;
-      console.log('更新数据');
-      setTimeout(() => {
-        this.loading = false;
-        this.eChartOptions = chartSettings.updateOptions(this.random(7));
-      }, this.randomInt(100, 500));
-    },
-    random(index) {
-      let arr = []; // 随机数字
-      for (let i = 0; i < index; i++) {
-        arr.push(this.randomInt(100, 500));
-      }
-      return arr;
-    },
+    onClickBlink() {
+      clearInterval(this.timer);
 
-    // 随机数
-    randomInt(min, max) {
-      return Math.round(Math.random() * (max - min) + min);
+      let xIndex = this.eChartOptions.xAxis.data.indexOf(this.highlightText);
+      let dataArr = this.originOptions.series.map((x) => x.data[xIndex]);
+
+      this.timer = setInterval(() => {
+        this.eChartOptions.series = this.eChartOptions.series.map((x, i) => {
+          if (typeof x.data[xIndex] !== 'object') {
+            let value = x.data[xIndex];
+            x.data[xIndex] = {
+              value,
+              itemStyle: {
+                color: '#a90000',
+              },
+            };
+          } else {
+            let value = dataArr[i];
+            x.data[xIndex] = value;
+          }
+          return x;
+        });
+      }, 1000);
     },
   },
 };
