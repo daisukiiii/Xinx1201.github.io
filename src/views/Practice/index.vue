@@ -18,12 +18,14 @@
         <DebounceThrottle v-if="item.key == 'DebounceThrottle'" />
         <ComponentsSkills v-if="item.key == 'ComponentsSkills'" />
         <Communication v-if="item.key == 'Communication'" />
+        <Vuex v-if="item.key == 'Vuex'" />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+import Vuex from './Vuex';
 import Lock from './Lock.vue';
 import VChart from './VChart';
 import Echarts from './Echarts';
@@ -37,6 +39,7 @@ import ComponentsSkills from './ComponentsSkills';
 export default {
   name: 'Practice',
   components: {
+    Vuex,
     Lock,
     VChart,
     Echarts,
@@ -95,6 +98,11 @@ export default {
           icon: 'el-icon-phone-outline',
           name: '组件通讯',
           key: 'Communication',
+        },
+        {
+          icon: 'el-icon-takeaway-box',
+          name: 'Vuex',
+          key: 'Vuex',
         },
       ],
     };
