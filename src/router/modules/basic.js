@@ -39,6 +39,14 @@ export default {
       }
     },
     {
+      path: '/ValuablesStatistical',
+      name: 'ValuablesStatistical',
+      component: () => import('@/views/ValuablesStatistical'),
+      meta: {
+        title: '掉落统计'
+      }
+    },
+    {
       path: '/Practice',
       name: 'Practice',
       component: () => import('@/views/Practice'),
