@@ -1,6 +1,12 @@
 <template>
   <div>
     <el-table :data="tableData" style="width: 100%" height="80vh">
+      <el-table-column
+        type="index"
+        label="序号"
+        width="80"
+        align="center"
+      ></el-table-column>
       <el-table-column prop="time" label="时间" sortable align="center">
         <template slot-scope="scope">
           {{ (scope.row.time * 1000) | dateToString('datetime') }}
@@ -19,9 +25,6 @@
 </template>
 
 <script>
-import { randomInt } from '@/utils';
-import serverList from '@/assets/data/server.json';
-import emoticons from '@/assets/data/emoticons.json';
 export default {
   name: 'ForcastDataTable',
   props: {

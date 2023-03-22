@@ -7,8 +7,26 @@
       <el-input
         v-model="form.role"
         clearable
-        placeholder="请输入用户名"
+        placeholder="请输入角色名"
       ></el-input>
+    </el-form-item>
+
+    <!-- 副本 -->
+    <el-form-item>
+      <el-select
+        filterable
+        clearable
+        v-model="form.map"
+        placeholder="请选择掉落"
+      >
+        <el-option
+          v-for="item in mapList"
+          :key="item"
+          :label="item"
+          :value="item"
+        >
+        </el-option>
+      </el-select>
     </el-form-item>
 
     <!-- 掉落 -->
@@ -31,6 +49,7 @@ import valuablesData from '@/assets/data/valuables.json';
 
 const genNew = () => ({
   role: '', // 用户名
+  map: '',
   items: '太一玄晶', // 物品
 });
 
@@ -38,6 +57,7 @@ export default {
   data() {
     return {
       valuablesData, // 掉落统计
+      mapList: ['25人英雄西津渡', '25人普通西津渡'],
       form: genNew(),
     };
   },
