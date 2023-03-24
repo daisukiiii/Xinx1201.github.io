@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'jx3';
+  /* src引入需要精简的ttf字体文件 */
+  src: url('../../assets/font/jx3.ttf') format('truetype');
+  font-display: swap;
+}
+body {
+  font-family: 'jx3';
+}
+.ttf {
+  font-family: 'jx3';
+}

@@ -19,7 +19,6 @@
         <ComponentsSkills v-if="item.key == 'ComponentsSkills'" />
         <Communication v-if="item.key == 'Communication'" />
         <Vuex v-if="item.key == 'Vuex'" />
-        <Table v-if="item.key == 'Table'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -27,7 +26,6 @@
 
 <script>
 import Vuex from './Vuex';
-import Table from './Table'
 import Lock from './Lock.vue';
 import VChart from './VChart';
 import Echarts from './Echarts';
@@ -43,7 +41,6 @@ export default {
   components: {
     Vuex,
     Lock,
-    Table,
     VChart,
     Echarts,
     PlotlyJs,
@@ -106,11 +103,6 @@ export default {
           icon: 'el-icon-takeaway-box',
           name: 'Vuex',
           key: 'Vuex',
-        },
-        {
-          icon: 'el-icon-s-order',
-          name: 'Table',
-          key: 'Table',
         },
       ],
     };
