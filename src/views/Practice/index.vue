@@ -113,6 +113,8 @@ export default {
     let check = window.localStorage.getItem('practiceCheck');
     if (check) {
       this.activeName = JSON.parse(check);
+    }else{
+      this.activeName = '代办列表'
     }
     this.isLogin = JSON.parse(window.localStorage.getItem('login'));
   },
