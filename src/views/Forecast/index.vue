@@ -93,7 +93,7 @@ export default {
     // 记录时间
     recordTime(val) {
       this.form = Object.assign(this.form, val);
-      this.tableData.push(this.form);
+      this.tableData.push(JSON.parse(JSON.stringify(this.form)));
       // 清空数据
       // 清空筛选项
       this.$refs.operation.reset();

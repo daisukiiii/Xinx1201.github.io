@@ -138,7 +138,8 @@ export default {
     },
     // 重置筛选项
     reset() {
-      this.form = genNew();
+      this.form.map = ''
+      this.form.type = ''
     },
   },
 };
