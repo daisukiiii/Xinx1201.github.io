@@ -12,6 +12,7 @@
         <VChart v-if="item.key == 'VChart'" />
         <Echarts v-if="item.key == 'Echarts'" />
         <PlotlyJs v-if="item.key == 'PlotlyJs'" />
+        <Progress v-if="item.key == 'Progress'" />
         <TodoList v-if="item.key == 'TodoList'" />
         <Websocket v-if="item.key == 'Websocket'" />
         <TableTree v-if="item.key == 'TableTree'" />
@@ -29,6 +30,7 @@ import Vuex from './Vuex';
 import Lock from './Lock.vue';
 import VChart from './VChart';
 import Echarts from './Echarts';
+import Progress from './Progress';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
 import Websocket from './Websocket';
@@ -44,6 +46,7 @@ export default {
     VChart,
     Echarts,
     PlotlyJs,
+    Progress,
     TodoList,
     Websocket,
     TableTree,
@@ -103,6 +106,11 @@ export default {
           icon: 'el-icon-takeaway-box',
           name: 'Vuex',
           key: 'Vuex',
+        },
+        {
+          icon: 'el-icon-s-unfold',
+          name: 'Progress',
+          key: 'Progress',
         },
       ],
     };
