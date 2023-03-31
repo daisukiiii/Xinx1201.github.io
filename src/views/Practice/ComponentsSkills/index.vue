@@ -21,6 +21,10 @@
     <el-card shadow="hover">
       <Loading class="individual" />
     </el-card>
+    <!-- 组件六、占位符 -->
+    <el-card shadow="hover">
+      <PlaceHolder class="individual" />
+    </el-card>
   </div>
 </template>
 <script>
@@ -28,6 +32,7 @@ import Loading from './Loading.vue';
 import FormFlash from './FormFlash.vue';
 import TableTree from './TableTree.vue';
 import Transition from './Transition.vue';
+import PlaceHolder from './PlaceHolder.vue';
 import TableKeyWord from './TableKeyWord.vue';
 export default {
   name: 'Components',
@@ -36,6 +41,7 @@ export default {
     FormFlash,
     TableTree,
     Transition,
+    PlaceHolder,
     TableKeyWord,
   },
   data() {
