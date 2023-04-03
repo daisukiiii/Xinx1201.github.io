@@ -10,6 +10,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import * as filters from '@/utils/filters' // 过滤器
 import '@/assets/style/font.scss' // 引入全局字体
+import visibility from 'vue-visibility-change' // 监控浏览器标签页
 
 // 引入Echarts
 import * as echarts from 'echarts'
@@ -18,6 +19,7 @@ import print from '@/utils/print'
 
 Vue.use(print)
 Vue.use(ElementUI)
+Vue.use(visibility)
 Vue.component('Copyable', Copyable)
 Vue.prototype.$dialog = dialog
 Vue.prototype.$echarts = echarts
@@ -26,6 +28,11 @@ Vue.prototype.$echarts = echarts
 Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key])
 })
+
+visibility.change((evt, hidden) => {
+  return hidden
+})
+
 
 // 引入整体样式
 import '@/assets/style/main.scss'
