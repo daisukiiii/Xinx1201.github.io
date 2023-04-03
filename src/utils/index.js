@@ -9,3 +9,12 @@ export function parseQuery () {
 export function randomInt (min, max) {
   return Math.round(Math.random() * (max - min) + min)
 }
+
+// 循环中等待时间
+export async function sleep (time) {
+  return new Promise((resolve) => {
+    setInterval(() => {
+      resolve()
+    }, time)
+  })
+}

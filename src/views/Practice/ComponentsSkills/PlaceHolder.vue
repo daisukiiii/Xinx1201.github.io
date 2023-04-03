@@ -2,14 +2,15 @@
   <div>
     <div class="mgb20">展示占位符打字 循环效果</div>
     <div class="mgb20">
-      <el-button @click="onClickStart">开始定时器</el-button>
-      <el-button @click="onClickDestroy">摧毁定时器</el-button>
+      <el-button @click="clearTimer">摧毁定时器</el-button>
     </div>
     <el-input v-model="text" :placeholder="placeholder"></el-input>
   </div>
 </template>
 
 <script>
+import { sleep } from '@/utils';
+
 export default {
   data() {
     return {
@@ -19,33 +20,25 @@ export default {
       placeholderArr: ['996.ICU', 'Baidu.com', '请输入你想输入的文字(⊙o⊙)…'],
     };
   },
-  methods: {
-    onClickStart() {
-      this.clearTimer();
+  mounted() {
+    this.clearTimer();
+    this.timer = setInterval(() => {
       this.typewriter();
-      // let count = 0;
-      // this.timer = setInterval(() => {
-      //   console.log(count % this.placeholderArr.length);
-      //   count += 1;
-      // }, 1000);
-    },
-    onClickDestroy() {
-      this.clearTimer();
-    },
-
+    }, 5000);
+  },
+  methods: {
     // 打字机模式
-    typewriter() {
-      // let str = '请输入你想输入的文字(⊙o⊙)…';
-      // let strArr = str.split('');
-      // console.log(strArr);
-
-      // setTimeout(() => {}, 900);
+    async typewriter() {
       for (let i = 0; i < this.placeholderArr.length; i++) {
-        this.add(this.placeholderArr[i]);
+        await sleep(1000);
+        this.showText(
+          this.placeholderArr[i],
+          this.placeholderArr[i].length * 10
+        );
       }
     },
 
-    add(arr, time = 1000) {
+    showText(arr, time = 1000) {
       let num = 0;
       let str = '';
       this.timer = setInterval(() => {
@@ -62,9 +55,7 @@ export default {
     },
 
     clearTimer() {
-      if (this.timer) {
-        clearInterval(this.timer);
-      }
+      clearInterval(this.timer);
     },
   },
 };
