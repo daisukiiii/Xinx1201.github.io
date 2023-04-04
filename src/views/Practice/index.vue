@@ -20,6 +20,7 @@
         <ComponentsSkills v-if="item.key == 'ComponentsSkills'" />
         <Communication v-if="item.key == 'Communication'" />
         <Vuex v-if="item.key == 'Vuex'" />
+        <GeoMap v-if="item.key == 'GeoMap'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -29,6 +30,7 @@
 import Vuex from './Vuex';
 import Lock from './Lock.vue';
 import VChart from './VChart';
+import GeoMap from './GeoMap';
 import Echarts from './Echarts';
 import Progress from './Progress';
 import PlotlyJs from './PlotlyJs';
@@ -44,6 +46,7 @@ export default {
     Vuex,
     Lock,
     VChart,
+    GeoMap,
     Echarts,
     PlotlyJs,
     Progress,
@@ -112,6 +115,11 @@ export default {
           name: 'Progress',
           key: 'Progress',
         },
+        {
+          icon: 'el-icon-map-location',
+          name: 'GeoMap',
+          key: 'GeoMap',
+        },
       ],
     };
   },
@@ -121,8 +129,8 @@ export default {
     let check = window.localStorage.getItem('practiceCheck');
     if (check) {
       this.activeName = JSON.parse(check);
-    }else{
-      this.activeName = '代办列表'
+    } else {
+      this.activeName = '代办列表';
     }
     this.isLogin = JSON.parse(window.localStorage.getItem('login'));
   },
