@@ -2,6 +2,7 @@
   <div v-visibility-change="change">
     <div class="mgb20">展示占位符打字 循环效果</div>
     <div class="mgb20">
+      <el-button @click="start">启动定时器</el-button>
       <el-button @click="clearTimer">摧毁定时器</el-button>
     </div>
     <el-input v-model="text" :placeholder="placeholder"></el-input>
@@ -30,9 +31,6 @@ export default {
       placeholder: '请输入文字', //展现的文字
       placeholderArr: ['996.ICU', 'Baidu.com', 'xin-code.com', 'Xinx1201.com'],
     };
-  },
-  async mounted() {
-    this.start();
   },
   methods: {
     change(evt, hidden) {
