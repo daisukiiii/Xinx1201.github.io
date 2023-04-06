@@ -21,6 +21,7 @@
         <Communication v-if="item.key == 'Communication'" />
         <Vuex v-if="item.key == 'Vuex'" />
         <GeoMap v-if="item.key == 'GeoMap'" />
+        <Dialog v-if="item.key == 'Dialog'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -32,6 +33,7 @@ import Lock from './Lock.vue';
 import VChart from './VChart';
 import GeoMap from './GeoMap';
 import Echarts from './Echarts';
+import Dialog from './Dialog';
 import Progress from './Progress';
 import PlotlyJs from './PlotlyJs';
 import TodoList from './TodoList';
@@ -47,6 +49,7 @@ export default {
     Lock,
     VChart,
     GeoMap,
+    Dialog,
     Echarts,
     PlotlyJs,
     Progress,
@@ -119,6 +122,11 @@ export default {
           icon: 'el-icon-map-location',
           name: 'GeoMap',
           key: 'GeoMap',
+        },
+        {
+          icon: 'el-icon-info',
+          name: 'Dialog',
+          key: 'Dialog',
         },
       ],
     };
