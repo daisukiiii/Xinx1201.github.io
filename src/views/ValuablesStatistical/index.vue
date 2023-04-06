@@ -8,7 +8,6 @@
       <div class="flex-auto"></div>
     </div>
     <DataTable
-      @selection="selection"
       :tableData="tableData"
       class="flex-auto"
     />

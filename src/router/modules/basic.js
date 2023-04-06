@@ -39,6 +39,14 @@ export default {
       }
     },
     {
+      path: '/CashOut',
+      name: 'CashOut',
+      component: () => import('@/views/CashOut'),
+      meta: {
+        title: '变现'
+      }
+    },
+    {
       path: '/ValuablesStatistical',
       name: 'ValuablesStatistical',
       component: () => import('@/views/ValuablesStatistical'),

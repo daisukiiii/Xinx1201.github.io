@@ -43,3 +43,29 @@ export function dateToString (timestamp, format = 'date') {
   }
   return dayjs(timestamp).format(_format)
 }
+
+
+/**
+ * 万 = 砖
+ * @param value 数字值
+ */
+export function gameGoldTransform (value) {
+  let unit = '金' // 最后携带的单位
+  let Zhuan = 10000  // 10000 = 1砖
+  if (value > Zhuan) {
+    let overValueArr = (value / Zhuan).toString().split('.')  // 超过1砖的钱
+    return overValueArr[0] + '砖' + fillZero(overValueArr[1]) + unit
+  } else if (value == Zhuan) {
+    return (value / Zhuan) + '砖'
+  } else {
+    return value + '金'
+  }
+}
+
+export function fillZero (val) {
+  if (4 - val.length) {
+    return val.padEnd(4, '0')
+  } else {
+    return val
+  }
+}
