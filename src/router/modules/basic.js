@@ -43,7 +43,7 @@ export default {
       name: 'CashOut',
       component: () => import('@/views/CashOut'),
       meta: {
-        title: '变现'
+        title: '提现'
       }
     },
     {
