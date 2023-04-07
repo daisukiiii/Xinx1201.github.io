@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%" height="80vh">
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      height="80vh"
+      :summary-method="getSummaries"
+      show-summary
+    >
       <el-table-column
         type="index"
         label="序号"
@@ -90,9 +96,19 @@ export default {
     },
 
     getSummaries({ columns, data }) {
-      console.log(columns);
-      console.log(data);
+      // 总金价
+      let totalGold = this.$options.filters.gameGoldTransform(
+        data.reduce((acc, cur) => acc + cur.number * cur.price, 0)
+      );
+
+      // ￥可提现
+      let totalMoney = data.reduce(
+        (acc, cur) => acc + (cur.number * cur.price) / this.serverGold,
+        0
+      );
       // return sums;
+      let sum = ['总计', '', '', '', totalGold, totalMoney.toFixed(2) + '元'];
+      return sum;
     },
   },
 };
