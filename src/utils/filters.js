@@ -50,11 +50,13 @@ export function dateToString (timestamp, format = 'date') {
  * @param value 数字值
  */
 export function gameGoldTransform (value) {
-  let unit = '金' // 最后携带的单位
   let Zhuan = 10000  // 10000 = 1砖
   if (value > Zhuan) {
     let overValueArr = (value / Zhuan).toString().split('.')  // 超过1砖的钱
-    return overValueArr[0] + '砖' + fillZero(overValueArr[1]) + unit
+    if (overValueArr.length == 1 && value > Zhuan) {
+      overValueArr[1] = '0000'
+    }
+    return overValueArr[0] + '砖' + fillZero(overValueArr[1])
   } else if (value == Zhuan) {
     return (value / Zhuan) + '砖'
   } else {
@@ -64,8 +66,10 @@ export function gameGoldTransform (value) {
 
 export function fillZero (val) {
   if (4 - val.length) {
-    return val.padEnd(4, '0')
+    return val.padEnd(4, '0') + '金'
+  } else if (val == '0000') {
+    return ''
   } else {
-    return val
+    return Number(val) + '金'
   }
 }
