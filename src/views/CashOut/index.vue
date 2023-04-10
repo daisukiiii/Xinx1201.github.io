@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import Operation from './Operation.vue';
-import DataTable from './DataTable.vue';
+import Operation from './Operation';
+import DataTable from './DataTable';
 import debounce from 'lodash/debounce';
 
 export default {
