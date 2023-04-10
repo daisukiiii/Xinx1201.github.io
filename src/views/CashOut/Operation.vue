@@ -2,6 +2,7 @@
   <el-form class="flex-row flex-wrap" :inline="true" :model="form">
     <el-form-item label="服务器金价">
       <el-input-number
+        size="mini"
         v-model="serverGold"
         controls-position="right"
         :min="0"
