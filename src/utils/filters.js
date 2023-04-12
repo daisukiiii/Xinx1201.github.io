@@ -44,6 +44,28 @@ export function dateToString (timestamp, format = 'date') {
   return dayjs(timestamp).format(_format)
 }
 
+// 剑三帧数转换
+// 剑三的时间基本单位是帧，一秒是十六帧，所有时间都是帧的整倍数
+export function frameTransformTime (value) {
+  const frame = 16
+  let time = value / frame
+  if (value < 16) {
+    return value + '帧'
+  } else if (time < 60) {
+    return time + '秒'
+  } else if (time >= 60 && value <= 57600) {
+    return time / 60 + '分'
+  } else if (value > 57600) {
+    return time / 60 / 60 / 24 + '天'
+  } else {
+    return time + '秒'
+  }
+}
+
+// 布尔型数据 翻译为是否
+export function BooleanTranslate (value) {
+  return value ? '是' : '否'
+}
 
 /**
  * 万 = 砖

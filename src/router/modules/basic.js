@@ -47,11 +47,11 @@ export default {
       }
     },
     {
-      path: '/ValuablesStatistical',
-      name: 'ValuablesStatistical',
-      component: () => import('@/views/ValuablesStatistical'),
+      path: '/Buff',
+      name: 'Buff',
+      component: () => import('@/views/Buff'),
       meta: {
-        title: '掉落统计'
+        title: '隐藏Buff'
       }
     },
     {
