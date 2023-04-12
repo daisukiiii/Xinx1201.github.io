@@ -51,7 +51,7 @@ export default {
       name: 'Buff',
       component: () => import('@/views/Buff'),
       meta: {
-        title: '隐藏Buff'
+        title: 'Buff'
       }
     },
     {
