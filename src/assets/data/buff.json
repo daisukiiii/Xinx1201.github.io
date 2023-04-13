@@ -905,6 +905,18 @@
         "name": "宠物奇遇CD_BUFF_4",
         "Desc": null,
         "nickName": ""
+      },
+      {
+        "id": 26148,
+        "Level": 1,
+        "Count": 1,
+        "Useage": 110,
+        "MaxStackNum": 1,
+        "IsStackable": 0,
+        "Interval": 16,
+        "name": "宠物奇遇CD_BUFF_5",
+        "Desc": null,
+        "nickName": ""
       }
     ]
   },
@@ -1019,6 +1031,42 @@
         "name": "战场触发奇遇",
         "Desc": null,
         "nickName": "黑白路"
+      },
+      {
+        "id": 12437,
+        "Level": 1,
+        "Count": 1440,
+        "Useage": 146,
+        "MaxStackNum": 10,
+        "IsStackable": 1,
+        "Interval": 960,
+        "name": "发布援助次数",
+        "Desc": null,
+        "nickName": "韶华故"
+      },
+      {
+        "id": 12438,
+        "Level": 1,
+        "Count": 15,
+        "Useage": 146,
+        "MaxStackNum": 1,
+        "IsStackable": 0,
+        "Interval": 960,
+        "name": "不能援助CD",
+        "Desc": null,
+        "nickName": "韶华故"
+      },
+      {
+        "id": 12439,
+        "Level": 1,
+        "Count": 1140,
+        "Useage": 146,
+        "MaxStackNum": 5,
+        "IsStackable": 1,
+        "Interval": 960,
+        "name": "援助次数",
+        "Desc": null,
+        "nickName": "韶华故"
       },
       {
         "id": 13382,
@@ -1344,7 +1392,18 @@
         "Desc": null,
         "nickName": ""
       },
-
+      {
+        "id": 25138,
+        "Level": 1,
+        "Count": 1,
+        "Useage": 42,
+        "MaxStackNum": 10,
+        "IsStackable": 1,
+        "Interval": 960,
+        "name": "跨服状态触发奇遇红尘不渡标记",
+        "Desc": null,
+        "nickName": ""
+      },
       {
         "id": "25209_1",
         "Level": 1,
@@ -1779,18 +1838,6 @@
     "type": "技能",
     "children": [
       {
-        "id": 25049,
-        "Level": 1,
-        "Count": 1,
-        "Useage": 163,
-        "MaxStackNum": 2,
-        "IsStackable": 1,
-        "Interval": 960,
-        "name": "破釜沉舟破招触发需求buff",
-        "Desc": "下两次“破釜沉舟”额外附带一段破招伤害",
-        "nickName": ""
-      },
-      {
         "id": 15253,
         "Level": 1,
         "Count": 1,
@@ -1800,6 +1847,42 @@
         "Interval": 0,
         "name": "爆体层数标记",
         "Desc": "累计6层效果可以施展“降麒式”",
+        "nickName": ""
+      },
+      {
+        "id": "22019_2",
+        "Level": 1,
+        "Count": 1,
+        "Useage": 289,
+        "MaxStackNum": 12,
+        "IsStackable": 1,
+        "Interval": 16,
+        "name": "通用_破绽层数标记",
+        "Desc": null,
+        "nickName": "百战异闻录"
+      },
+      {
+        "id": 23201,
+        "Level": 1,
+        "Count": 1,
+        "Useage": 233,
+        "MaxStackNum": 5,
+        "IsStackable": 1,
+        "Interval": 48,
+        "name": "新增益_震荡波计数",
+        "Desc": null,
+        "nickName": "浪客行·锋勇计数"
+      },
+      {
+        "id": 25049,
+        "Level": 1,
+        "Count": 1,
+        "Useage": 163,
+        "MaxStackNum": 2,
+        "IsStackable": 1,
+        "Interval": 960,
+        "name": "破釜沉舟破招触发需求buff",
+        "Desc": "下两次“破釜沉舟”额外附带一段破招伤害",
         "nickName": ""
       }
     ]
