@@ -8,9 +8,7 @@
         :min="0"
       ></el-input-number>
     </el-form-item>
-
     <div class="flex-auto" />
-
     <el-form-item>
       <el-button type="primary" icon="el-icon-plus" @click="onClickAdd"
         >新增</el-button

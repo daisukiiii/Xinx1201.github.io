@@ -2,9 +2,7 @@
   <div class="flex-column">
     <div class="infoBox">
       数据源:
-      <a href="https://www.jx3box.com/app/database/" target="_blank"
-        >剑三魔盒</a
-      >
+      <a :href="href" target="_blank">剑三魔盒</a>
     </div>
   </div>
 </template>
@@ -12,7 +10,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      href: 'https://www.jx3box.com/app/database/',
+    };
   },
   methods: {},
 };

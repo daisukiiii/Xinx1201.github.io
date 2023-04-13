@@ -1,13 +1,11 @@
 <template>
   <div class="flex-column flex-ai-stretch">
-    <!-- 顶部筛选框 -->
     <Operation
       @getServerGold="getServerGold"
       @add="add"
       ref="operation"
       class="flex-none"
     />
-
     <DataTable
       :serverGold="serverGold"
       :tableData="tableData"
@@ -37,8 +35,6 @@ export default {
     this.add();
   },
   methods: {
-    // 拿到用户自定义的服务器金价
-
     // 防抖处理的用户金价
     getServerGold: debounce(function (val) {
       if (val == '') {

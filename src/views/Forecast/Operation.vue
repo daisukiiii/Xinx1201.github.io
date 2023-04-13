@@ -1,7 +1,6 @@
 <template>
   <el-form class="flex-row flex-wrap" :inline="true" :model="form">
     <div class="flex-auto" />
-
     <!-- 大区 -->
     <el-form-item>
       <el-select
@@ -138,8 +137,8 @@ export default {
     },
     // 重置筛选项
     reset() {
-      this.form.map = ''
-      this.form.type = ''
+      this.form.map = '';
+      this.form.type = '';
     },
   },
 };
