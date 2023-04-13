@@ -2,6 +2,7 @@
   <div>
     <el-table
       border
+      stripe
       row-key="id"
       :data="tableData"
       height="80vh"
