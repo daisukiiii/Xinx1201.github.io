@@ -49,7 +49,9 @@ export function dateToString (timestamp, format = 'date') {
 export function frameTransformTime (value) {
   const frame = 16
   let time = value / frame
-  if (value < 16) {
+  if (value == null) {
+    return '-'
+  } else if (value < 16) {
     return value + '帧'
   } else if (time < 60) {
     return time + '秒'
