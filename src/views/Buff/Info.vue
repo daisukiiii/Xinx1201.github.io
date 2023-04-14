@@ -2,7 +2,7 @@
   <div class="flex-column">
     <div class="infoBox">
       数据源:
-      <a :href="href" target="_blank">剑三魔盒</a>
+      <el-link type="primary" :href="href" target="_blank">剑三魔盒</el-link>
     </div>
   </div>
 </template>
