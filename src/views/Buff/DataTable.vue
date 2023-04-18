@@ -18,6 +18,13 @@
       <el-table-column width="1">
         <template slot-scope="scope">
           <span v-if="scope.row.type">{{ scope.row.type }}</span>
+          <el-tag
+            class="mgl10"
+            effect="plain"
+            type="success"
+            v-if="scope.row.children"
+            >{{ scope.row.children.length }}</el-tag
+          >
         </template>
       </el-table-column>
       <el-table-column label="名称" align="center" width="260">
