@@ -23,7 +23,11 @@ export default {
 
       this.width = 0;
       this.timer = setInterval(() => {
-        this.width += 1;
+        if(this.width == 100){
+          clearInterval(this.timer);
+        }else{
+          this.width += 1;
+        }
       }, 100);
     },
   },
@@ -33,6 +37,7 @@ export default {
 .container {
   position: relative;
   width: 100%;
+  height: 500px;
   display: flex;
   flex-direction: row;
   align-items: center;
