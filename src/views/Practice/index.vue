@@ -22,6 +22,7 @@
         <Vuex v-if="item.key == 'Vuex'" />
         <GeoMap v-if="item.key == 'GeoMap'" />
         <Dialog v-if="item.key == 'Dialog'" />
+        <InfiniteTable v-if="item.key == 'InfiniteTable'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -42,6 +43,7 @@ import TableTree from './TableTree';
 import Communication from './Communication';
 import DebounceThrottle from './DebounceThrottle';
 import ComponentsSkills from './ComponentsSkills';
+import InfiniteTable from './InfiniteTable';
 export default {
   name: 'Practice',
   components: {
@@ -59,6 +61,7 @@ export default {
     Communication,
     DebounceThrottle,
     ComponentsSkills,
+    InfiniteTable,
   },
   data() {
     return {
@@ -127,6 +130,11 @@ export default {
           icon: 'el-icon-info',
           name: 'Dialog',
           key: 'Dialog',
+        },
+        {
+          icon: 'el-icon-tickets',
+          name: '表格无限滚动',
+          key: 'InfiniteTable',
         },
       ],
     };
