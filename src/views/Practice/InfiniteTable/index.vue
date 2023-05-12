@@ -1,7 +1,7 @@
 <template>
   <el-table
     border
-    height="800"
+    height="760"
     style="width: 100%"
     stripe
     :data="visibleData"
